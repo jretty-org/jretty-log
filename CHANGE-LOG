@@ -1,0 +1,20 @@
+Zollty Log Library CHANGELOG
+===============================
+http://www.zollty.org/zollty-log
+
+
+Changes in version 1.0 (2013-05-17)
+-------------------------------------
+Create this project. It's a simple tools library. One of its design goals is to improve the logging's performance in multi-threaded environment.
+In addition, it also can work with other logging libraries like log4j, to extend their functionality.
+
+
+Changes in version 1.1 (2013-08-10)
+-------------------------------------
+Many optimization of design, and code refactoring. And applying it to ZolltyMVC framework.
+
+
+Changes in version 1.2 (2014-03-05)
+-------------------------------------
+A small amount of optimization.
+
