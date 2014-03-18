@@ -4,11 +4,11 @@ zollty-log
 The ZolltyLog is a simple, generic and flexible logging library for Java, which can work with other logging frameworks, like log4j or logback.
 
 1. Easy to use
-For example:
+	For example:
 
 	public static final Logger LOG = LogFactory.getLogger(); // Concise
 	
-	LOG.error("Hello {}, welcome to {}", "GUYS", "ZlltyLog Demo"); // use placeholder
+	LOG.error("Hello {}, welcome to {}", "GUYS", "ZolltyLog Demo"); // use placeholder
 
 2. Enhancements
 
