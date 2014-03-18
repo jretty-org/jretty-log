@@ -5,17 +5,17 @@ The ZolltyLog is a simple, generic and flexible logging library for Java, which 
 
 1. Easy to use
 	For example:
-
-	public static final Logger LOG = LogFactory.getLogger(); // Concise
-	
-	LOG.error("Hello {}, welcome to {}", "GUYS", "ZolltyLog Demo"); // use placeholder
-
+```
+        public static final Logger LOG = LogFactory.getLogger(); // Concise
+        
+        LOG.error("Hello {}, welcome to {}", "GUYS", "ZolltyLog Demo"); // use placeholder
+```
 2. Enhancements
-
-	if( LogFactory.isEnableFor(THIS_METHOD_OR_CLASS_OR_PLACE) ){
-		LOG.error(e, "Some additional tips....");
-	}
-
+```
+        if( LogFactory.isEnableFor(THIS_PLACE_OR_METHOD_OR_CLASS) ) { // Local log level control
+                LOG.error(e, "Some additional tips....");
+        }
+```
 3. Some advanced usages
 
 	See it's document later.
