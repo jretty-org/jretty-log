@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 9.00.8112.16464"><LINK rel=stylesheet 
+href="BLOCKQUOTE{margin-Top: 0px; margin-Bottom: 0px; margin-Left: 2em}">
+<style type="text/css">
+<!--
+pre { font-family: verdana; color: #000000; background-color: #ffffff; }
+.Comment { color: #0000ff; }
+.Constant { color: #ff00ff; }
+.Statement { color: #804040; font-weight: bold; }
+.Type { color: #2e8b57; font-weight: bold; }
+-->
+</style>
+</HEAD>
+<BODY style="MARGIN: 10px; FONT-FAMILY: verdana; FONT-SIZE: 10pt">
+<DIV><FONT size=2 face=Verdana></FONT>&nbsp;</DIV>
+<DIV>
+<H1 
+style="BOX-SIZING: border-box; BORDER-BOTTOM: rgb(221,221,221) 1px solid; POSITION: relative; PADDING-BOTTOM: 0px; TEXT-TRANSFORM: none; TEXT-INDENT: 0px; MARGIN: 0px 0px 15px; PADDING-LEFT: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; FONT: bold 2.5em/1.7 Helvetica, arial, freesans, clean, sans-serif; WHITE-SPACE: normal; COLOR: rgb(51,51,51); CURSOR: text; WORD-SPACING: 0px; PADDING-TOP: 0px; -webkit-text-stroke-width: 0px">zollty-log</H1>
+<P 
+style="BOX-SIZING: border-box; TEXT-TRANSFORM: none; TEXT-INDENT: 0px; MARGIN: 15px 0px; LETTER-SPACING: normal; FONT: 15px/25px Helvetica, arial, freesans, clean, sans-serif; WHITE-SPACE: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">The 
+ZolltyLog is a simple, generic and flexible logging library for Java, which can 
+work with other logging frameworks, like log4j or logback.</P></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT size=2 face=Verdana></FONT>&nbsp;</DIV>
+<DIV><FONT size=4 face=Verdana><STRONG>一、简单用法</STRONG></FONT></DIV>
+<DIV>
+<H3 
+style="BOX-SIZING: border-box; POSITION: relative; PADDING-BOTTOM: 0px; TEXT-TRANSFORM: none; TEXT-INDENT: 0px; MARGIN: 1em 0px 15px; PADDING-LEFT: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; FONT: bold 1.5em/1.7 Helvetica, arial, freesans, clean, sans-serif; WHITE-SPACE: normal; COLOR: rgb(51,51,51); CURSOR: text; WORD-SPACING: 0px; PADDING-TOP: 0px; -webkit-text-stroke-width: 0px"><A 
+style="BOX-SIZING: border-box; POSITION: absolute; PADDING-LEFT: 30px; BOTTOM: 0px; PADDING-RIGHT: 6px; DISPLAY: block; COLOR: rgb(65,131,196); MARGIN-LEFT: -30px; CURSOR: pointer; TEXT-DECORATION: none; TOP: 0px; LEFT: 0px" 
+class=anchor href="https://github.com/zollty-org/zollty-log#easy-to-use" 
+name=easy-to-use></A>Easy to use</H3>
+<DIV 
+style="BOX-SIZING: border-box; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; LETTER-SPACING: normal; FONT: 15px/25px Helvetica, arial, freesans, clean, sans-serif; WHITE-SPACE: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px" 
+class="highlight highlight-java"><PRE style="BOX-SIZING: border-box; BORDER-BOTTOM: rgb(221,221,221) 1px solid; BORDER-LEFT: rgb(221,221,221) 1px solid; PADDING-BOTTOM: 6px; LINE-HEIGHT: 19px; BACKGROUND-COLOR: rgb(248,248,248); MARGIN: 15px 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; FONT-FAMILY: Consolas, 'Liberation Mono', Courier, monospace; WORD-WRAP: normal; FONT-SIZE: 13px; OVERFLOW: auto; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: rgb(221,221,221) 1px solid; PADDING-TOP: 6px; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px"><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=kd>  public</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=kd>static</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=kd>final</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>Logger</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>LOG</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>=</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>LogFactory</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>.</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: teal" class=na>getLogger</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>();</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-STYLE: italic; COLOR: rgb(153,153,136)" class=c1>// Concise</SPAN>
+<br/>
+  <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>LOG</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>.</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: teal" class=na>error</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>(</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)" class=s>"Hello {}, welcome to {}"</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>,</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)" class=s>"GUYS"</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>,</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)" class=s>"ZolltyLog Demo"</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>);</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-STYLE: italic; COLOR: rgb(153,153,136)" class=c1>// use placeholder</SPAN>
+  <br/>
+  <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=k>if</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>(</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>LogFactory</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>.</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: teal" class=na>isEnableFor</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>(</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>THIS_PLACE_OR_METHOD_OR_CLASS</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>)</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>)</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>{</SPAN> <SPAN style="BOX-SIZING: border-box; FONT-STYLE: italic; COLOR: rgb(153,153,136)" class=c1>// Local log level control</SPAN>
+    <SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>LOG</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>.</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: teal" class=na>error</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>(</SPAN><SPAN style="BOX-SIZING: border-box; COLOR: rgb(51,51,51)" class=n>e</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>,</SPAN> <SPAN style="BOX-SIZING: border-box; COLOR: rgb(221,17,68)" class=s>"Some additional tips...."</SPAN><SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>);</SPAN>
+  <SPAN style="BOX-SIZING: border-box; FONT-WEIGHT: bold" class=o>}</SPAN>
+  </PRE></DIV>
+</DIV>
+<DIV>更多用法，直接查看 </DIV>
+<DIV style="TEXT-INDENT: 4em; FONT-WEIGHT: bold">examples/BasicExample.java。</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><STRONG><FONT size=4>二、高级配置</FONT></STRONG></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>找到 src/main/resources/<FONT color=#a80300>zollty-log.properties</FONT> </DIV>
+<DIV>&nbsp;</DIV>
+<DIV>内容如下：</DIV>
+<DIV>
+<DIV style="TEXT-INDENT: 2em">rootLogger=TRACE,STDOUT</DIV>
+<DIV style="TEXT-INDENT: 2em">appender.STDOUT.layout.className=simple</DIV>
+<DIV style="TEXT-INDENT: 2em">logger.org.zollty.dbk=INFO</DIV></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>第一行是主要配置，指出日志阀门的级别和日志的实现方式。</DIV>
+<DIV>1）第一个参数，TRACE代表日志的阀门值为“TRACE级别”。低于TRACE级别的日志，将不会打印。这个是全局性的日志级别。</DIV>
+<DIV>2）第二个参数，是日志的实现方式。目前可以为三个值：STDOUT、LOG4J、OTHER，指出日志配置方式的名称。具体作用见下文。</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>第二行是日志实现方式的具体配置。</DIV>
+<DIV>1）当实现方式为STDOUT时，支持的配置如下</DIV>
+<DIV style="TEXT-INDENT: 2em">appender.STDOUT.layout.className=simple</DIV>
+<DIV style="TEXT-INDENT: 2em">表示类名称是全名（比如org.zollty.log.ABC）还是短名称(比如ABC)。其值为simple时用短名称，否则用类全名。</DIV>
+<DIV>2）当实现方式为LOG4J时，支持的配置如下</DIV>
+<DIV style="TEXT-INDENT: 2em">暂无。将来可能会添加更多的配置选项。</DIV>
+<DIV>3）当实现方式为OTHER时，支持的配置如下</DIV>
+<DIV style="TEXT-INDENT: 2em">必须指定appender.OTHER.name值。比如</DIV>
+<DIV style="TEXT-INDENT: 2em">appender.OTHER.name=<FONT 
+color=#a80300>com.travelsky.report.log.TreLog4jLogger</FONT></DIV>
+<DIV style="TEXT-INDENT: 2em">也就是说，要指明具体的实现类的全名。（用作java的反射调用）</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>第三行是设置特定包的日志级别。</DIV>
+<DIV>1）格式为logger.包路径。例如，上面设置的是logger.org.zollty.dbk=INFO，则表示对于org.zollty.dbk包，设置的日志级别为INFO级别。</DIV>
+<DIV style="TEXT-INDENT: 2em">这个级别比全局级别高时，才会其作用，比如说全局级别为ERROR，这个地方你设置成INFO就没任何作用，道理很简单，全局级别的优先级更高。</DIV>
+<DIV>2）可以设置多个特定的包日志级别。</DIV>
+<DIV>&nbsp;</DIV>
+
+<DIV><STRONG><FONT size=4>三、自定义Logger实现类</FONT></STRONG></DIV>
+
+<DIV>&nbsp;</DIV>
+<DIV>一个简单的例子如下：</DIV>
+<DIV>public&nbsp;class&nbsp;TreLog4jLogger&nbsp;<FONT 
+color=#a80300>implements</FONT>&nbsp;<FONT 
+color=#0000ff>org.zollty.log.BasicLog,&nbsp;LoggerSupport</FONT>&nbsp;{</DIV>
+<DIV></DIV>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <DIV>private&nbsp;static&nbsp;final&nbsp;String&nbsp;FQCN&nbsp;=&nbsp;LoggerWrapper.class.getName();</DIV>
+  <DIV></DIV>
+  <DIV>private&nbsp;transient&nbsp;org.apache.log4j.Logger&nbsp;logger;</DIV></BLOCKQUOTE>
+<DIV></DIV>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <DIV>public&nbsp;TreLog4jLogger(){</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FONT 
+  color=#0000ff>doService(0);</FONT></DIV>
+  <DIV>}</DIV></BLOCKQUOTE>
+<DIV></DIV>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <DIV>public&nbsp;TreLog4jLogger(String&nbsp;name)&nbsp;{</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp;<FONT color=#0000ff> 
+  this.logger&nbsp;=&nbsp;org.apache.log4j.Logger.getLogger(name);</FONT></DIV>
+  <DIV>}</DIV>
+  <DIV></DIV>
+  <DIV>@Override</DIV>
+  <DIV><FONT 
+  color=#0000ff>public&nbsp;org.zollty.log.BasicLog&nbsp;newInstance(String&nbsp;name)&nbsp;{</FONT></DIV>
+  <DIV><FONT color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  return&nbsp;new&nbsp;TreLog4jLogger(name);</FONT></DIV>
+  <DIV><FONT color=#0000ff>}</FONT></DIV></BLOCKQUOTE>
+<DIV></DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;@Override</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Object[]&nbsp;doService(final&nbsp;int&nbsp;serviceID,&nbsp;Object...&nbsp;args)&nbsp;{</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object[]&nbsp;rtn&nbsp;=&nbsp;null;</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch&nbsp;(serviceID)&nbsp;{</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;0:&nbsp;{</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+color=#0000ff>refreshConfig();</FONT></DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;1:&nbsp;{</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rtn&nbsp;=&nbsp;new&nbsp;Object[]&nbsp;{&nbsp;this.logger&nbsp;};&nbsp;//&nbsp;获得log4j.Logger对象</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;rtn;</DIV>
+<DIV>&nbsp;&nbsp;&nbsp;&nbsp;}</DIV>
+<DIV></DIV>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <DIV>public&nbsp;void&nbsp;<FONT color=#0000ff>refreshConfig()</FONT>{</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp; refreshLog4jConfig();</DIV>
+  <DIV>}</DIV>
+  <DIV></DIV>
+  <DIV>public&nbsp;static&nbsp;void&nbsp;refreshLog4jConfig(){</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; URL&nbsp;url;</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  url&nbsp;=&nbsp;Thread.currentThread().getContextClassLoader().getResource("log4j-config.xml");</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DOMConfigurator.configure(url);</DIV>
+  <DIV>}</DIV>
+  <DIV></DIV>
+  <DIV><FONT color=#0000ff>@Override</FONT></DIV>
+  <DIV><FONT 
+  color=#0000ff>public&nbsp;void&nbsp;info(Object&nbsp;message)&nbsp;{</FONT></DIV>
+  <DIV><FONT color=#0000ff>&nbsp;&nbsp;&nbsp;&nbsp; 
+  logger.log(FQCN,&nbsp;Level.INFO,&nbsp;message,&nbsp;null);</FONT></DIV>
+  <DIV><FONT color=#0000ff>}</FONT></DIV>
+  <DIV><FONT color=#0000ff></FONT></DIV>
+  <DIV><FONT color=#0000ff>@Override</FONT></DIV>
+  <DIV><FONT 
+  color=#0000ff>public&nbsp;void&nbsp;info(Throwable&nbsp;e)&nbsp;{</FONT></DIV>
+  <DIV><FONT color=#0000ff>&nbsp;&nbsp;&nbsp; 
+  logger.log(FQCN,&nbsp;Level.INFO,&nbsp;Utils.ExceptionUtil.getStackTraceStr(e),&nbsp;null);</FONT></DIV>
+  <DIV><FONT color=#0000ff>}</FONT></DIV>
+  <DIV>...省略其他info方法和debug、warn方法，它们都是类似的写法。</DIV></BLOCKQUOTE>
+<DIV>}</DIV>
+<DIV>&nbsp;</DIV>
+
+<DIV><STRONG><FONT size=4>四、高级用法</FONT></STRONG></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>1、动态刷新日志工厂的阀门级别。</DIV>
+<DIV>示例如下：（此例中，日志的工厂级别存放在数据库中）</DIV>
+<pre>
+<span class="Type">public</span> <span class="Type">static</span> <span class="Type">boolean</span> refreshLogFactoryLevel() {
+        CommonConfigDAO configdao = <span class="Statement">new</span> CommonConfigDAO(dataSource);
+        String level = configdao.queryValueByKey(<span class="Constant">&quot;LOG_FACTORY_LEVEL&quot;</span>);
+        <span class="Statement">if</span> (<span class="Constant">null</span> != level) {
+                org.zollty.log.LogFactory.LogManager.setThreshold(level);
+                <span class="Statement">return</span> <span class="Constant">true</span>;
+        }
+        <span class="Statement">return</span> <span class="Constant">false</span>;
+}
+</pre>
+<DIV>2、动态刷新日志开关</DIV>
+<DIV>
+<pre>
+<span class="Type">public</span> <span class="Type">boolean</span> refreshLogLevelMap() {
+        CommonConfigDAO configdao = <span class="Statement">new</span> CommonConfigDAO(dataSource);
+        Map&lt;String, String&gt; tempMap = configdao.queryConfigByModel(<span class="Constant">&quot;LOG_SWITCH&quot;</span>);
+        Map&lt;String, Boolean&gt; templogLevelMap = <span class="Statement">new</span> HashMap&lt;String, Boolean&gt;();
+        <span class="Statement">if</span> (tempMap != <span class="Constant">null</span> &amp;&amp; !tempMap.isEmpty()) {
+                Iterator&lt;Entry&lt;String, String&gt;&gt; iterator = tempMap.entrySet().iterator();
+                Entry&lt;String, String&gt; temp;
+                <span class="Statement">while</span> (iterator.hasNext()) {
+                        temp = iterator.next();
+                        <span class="Statement">if</span> (<span class="Constant">&quot;true&quot;</span>.equals(temp.getValue())) {
+                                templogLevelMap.put(temp.getKey(), <span class="Constant">true</span>);
+                        } <span class="Statement">else</span> {
+                                templogLevelMap.put(temp.getKey(), <span class="Constant">false</span>);
+                        }
+                }
+                setLogLevelMap(templogLevelMap);
+        }
+        <span class="Comment">// 刷新配置</span>
+        LogManager.updateLogModules(templogLevelMap);
+        log.info(<span class="Constant">&quot;refreshLogLevelMap END.............&quot;</span>);
+        <span class="Statement">return</span> <span class="Constant">true</span>;
+}
+</pre>
+</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV></BODY></HTML>
