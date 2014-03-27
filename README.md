@@ -17,4 +17,4 @@ The ZolltyLog is a simple, generic and flexible logging library for Java, which 
   }
 ```
 ###  Some advanced usages 
-	See it's document later.   
+	See the manual and docs.   
