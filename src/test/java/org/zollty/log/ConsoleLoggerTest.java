@@ -38,7 +38,7 @@ public class ConsoleLoggerTest {
         });
         parentLoggers.put("org.zollty.log.test", Level.toLevel("WARN"));
         
-        ConsoleAppender.parentLoggers = parentLoggers;
+        ConsoleAppender.setParentLoggers(parentLoggers);
         
         System.out.println("==================parrentTest================");
         basicLogTest();

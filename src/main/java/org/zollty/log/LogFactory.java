@@ -85,9 +85,11 @@ public class LogFactory {
                 return obj2.compareTo(obj1); // 降序排序
             }
         });
-        for (String key : pmap.keySet()) {
+        String key;
+        for (Map.Entry<String, String> entry : pmap.entrySet()) {
+            key = entry.getKey();
             if (key.startsWith("logger.")) {
-                parentLoggers.put(key.substring(7, key.length()), Level.toLevel(pmap.get(key)));
+                parentLoggers.put(key.substring(7, key.length()), Level.toLevel(entry.getValue()));
             }
         }
 
@@ -99,7 +101,7 @@ public class LogFactory {
             ConsoleAppender.setGlobalLevel(threshold);
             String classNameLayout = pmap.get("appender.STDOUT.layout.className");
             ConsoleAppender.setClassNameLayout(classNameLayout);
-            ConsoleAppender.parentLoggers = parentLoggers;
+            ConsoleAppender.setParentLoggers(parentLoggers);
         } else if ("LOG4J".equalsIgnoreCase(appenderFlag)) {
             LogManager.setThreshold(threshold); // 重置threshold
             LogFactory.logName = "Log4jLogger";

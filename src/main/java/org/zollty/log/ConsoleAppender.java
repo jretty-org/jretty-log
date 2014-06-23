@@ -23,17 +23,18 @@ import java.util.TreeMap;
  */
 public abstract class ConsoleAppender implements BasicLog, LoggerSupport {
 	
-	protected static Level globalLevel = Level.DEBUG;
+    private static Level globalLevel = Level.DEBUG;
 	private static final String MSG_SPLIT = " |- ";
 	private static String classNameLayout;
-	public static Map<String, Level> parentLoggers = new TreeMap<String, Level>(new Comparator<String>() {
+	private static Map<String, Level> parentLoggers = new TreeMap<String, Level>(new Comparator<String>() {
         @Override
         public int compare(String obj1, String obj2) {
             return obj2.compareTo(obj1); // 降序排序
         }
     });
 	
-	protected void add(Object message, String className, Level level, Throwable throwable) {
+	
+    protected void add(Object message, String className, Level level, Throwable throwable) {
 		
 		if( !level.isGreaterOrEqual(globalLevel) ) return;
 		
@@ -80,6 +81,14 @@ public abstract class ConsoleAppender implements BasicLog, LoggerSupport {
 
     public static String getClassNameLayout() {
         return classNameLayout;
+    }
+    
+    public static Map<String, Level> getParentLoggers() {
+        return parentLoggers;
+    }
+
+    public static void setParentLoggers(Map<String, Level> parentLoggers) {
+        ConsoleAppender.parentLoggers = parentLoggers;
     }
 
     public static void setClassNameLayout(String classNameLayout) {
