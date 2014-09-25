@@ -34,6 +34,8 @@ public class LogFactory {
 	
 	private static Map<String, Boolean> logModules = new HashMap<String, Boolean>();
 	
+	private static final String LOGFACTORY_CLASS_NAME = LogFactory.class.getName();
+	
 	public static Logger getLogger(Class<?> classz){
 		return getLogger(classz.getName());
 	}
@@ -43,14 +45,12 @@ public class LogFactory {
      */
     public static Logger getLogger() {
         StackTraceElement[] sts = Thread.currentThread().getStackTrace();
-        if (LogUtils.isAndroid()) {
-            for (int i = 0; i < sts.length; i++) {
-                if (sts[i].getClassName().equals(LogFactory.class.getName())) {
-                    return getLogger(sts[i + 1].getClassName());
-                }
+        for (int i = 0; i < sts.length; i++) {
+            if (LOGFACTORY_CLASS_NAME.equals(sts[i].getClassName())) {
+                return getLogger(sts[i + 1].getClassName());
             }
         }
-        return getLogger(sts[2].getClassName());
+        return getLogger(sts[3].getClassName());
     }
 
     public static Logger getLogger(String name) {

@@ -17,7 +17,7 @@
 	<groupId>org.zollty</groupId>
 	<artifactId>zollty-log</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1</version>
+	<version>1.2</version>
 	<name>zollty-log</name>
 	<url>https://github.com/zollty-org/zollty-log</url>
 	<description>A simple, generic and flexible logging library for Java.</description>
