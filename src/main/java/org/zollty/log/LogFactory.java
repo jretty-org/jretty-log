@@ -23,23 +23,23 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 /**
- * @author zollty 
+ * @author zollty
  * @since 2013-6-20
  */
 public class LogFactory {
-	
-	private static String logName;
-	private static boolean isInited;
-	private static LoggerSupport logCreator = null;
-	
-	private static Map<String, Boolean> logModules = new HashMap<String, Boolean>();
-	
-	private static final String LOGFACTORY_CLASS_NAME = LogFactory.class.getName();
-	
-	public static Logger getLogger(Class<?> classz){
-		return getLogger(classz.getName());
-	}
-	
+
+    private static String logName;
+    private static boolean isInited;
+    private static LoggerSupport logCreator = null;
+
+    private static Map<String, Boolean> logModules = new HashMap<String, Boolean>();
+
+    private static final String LOGFACTORY_CLASS_NAME = LogFactory.class.getName();
+
+    public static Logger getLogger(Class<?> classz) {
+        return getLogger(classz.getName());
+    }
+
     /**
      * 返回以调用者的类命名的Log,是获取Log对象最简单的方法!
      */
@@ -59,10 +59,9 @@ public class LogFactory {
         }
         return new LoggerWrapper(logCreator.newInstance(name));
     }
-	
+
     /**
-     * @param configName
-     *            default value "zollty-log.properties"
+     * @param configName default value "zollty-log.properties"
      */
     public static void refreshZolltyLogConfig(final String configName) {
         InputStream in = null;
@@ -70,7 +69,8 @@ public class LogFactory {
         Properties props = new Properties();
         try {
             props.load(in);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
         Map<String, String> pmap = LogUtils.covertProperties2Map(props);
@@ -102,18 +102,20 @@ public class LogFactory {
             String classNameLayout = pmap.get("appender.STDOUT.layout.className");
             ConsoleAppender.setClassNameLayout(classNameLayout);
             ConsoleAppender.setParentLoggers(parentLoggers);
-        } else if ("LOG4J".equalsIgnoreCase(appenderFlag)) {
+        }
+        else if ("LOG4J".equalsIgnoreCase(appenderFlag)) {
             LogManager.setThreshold(threshold); // 重置threshold
             LogFactory.logName = "Log4jLogger";
             logCreator = new Log4jLogger();
-        } else if ("OTHER".equalsIgnoreCase(appenderFlag)) {
+        }
+        else if ("OTHER".equalsIgnoreCase(appenderFlag)) {
             LogFactory.logName = pmap.get("appender.OTHER.name");
             LogManager.init(logName, threshold);
         }
     }
-	
-	private static boolean traceEnabled, debugEnabled, infoEnabled;
-	
+
+    private static boolean traceEnabled, debugEnabled, infoEnabled;
+
     public static boolean isTraceEnabled() {
         return traceEnabled;
     }
@@ -125,7 +127,7 @@ public class LogFactory {
     public static boolean isInfoEnabled() {
         return infoEnabled;
     }
-	
+
     public static boolean isEnabledFor(String moduleId) {
         return LogManager.isEnabledFor(moduleId);
     }
@@ -134,29 +136,29 @@ public class LogFactory {
         LogManager.updateLevelModuleMap("DEBUG");
     }
 
-	public static class LogManager{
-		
-		private static Iterator<Entry<String, Boolean>> lmIterator = null;
-		
+    public static class LogManager {
+
+        private static Iterator<Entry<String, Boolean>> lmIterator = null;
+
         public synchronized static void init(String logName, String level) {
             if (isInited) {
                 throw new IllegalStateException("already initialized, don't allow initialize again.");
             }
             LogFactory.logName = logName;
             LogManager.setThreshold(level.toUpperCase());
-//			if(logName==null || "ConsoleLogger".equals(logName)){
-//				logCreator = new ConsoleLogger(logName);
-//			}else if("Log4jLogger".equals(logName)){
-//				logCreator = new Log4jLogger(logName);
-//			}else{
-//				logCreator = LogUtils.createLogCreator(logName);
-//			}
-			logCreator = LogUtils.createLogCreator(logName);
-			
-			updateLevelModuleMap(level);
-			isInited = true;
-		}
-		
+            // if(logName==null || "ConsoleLogger".equals(logName)){
+            // logCreator = new ConsoleLogger(logName);
+            // }else if("Log4jLogger".equals(logName)){
+            // logCreator = new Log4jLogger(logName);
+            // }else{
+            // logCreator = LogUtils.createLogCreator(logName);
+            // }
+            logCreator = LogUtils.createLogCreator(logName);
+
+            updateLevelModuleMap(level);
+            isInited = true;
+        }
+
         public synchronized static void updateLogModule(String moduleId, boolean value) {
             if (logModules.containsKey(moduleId)) {
                 logModules.remove(moduleId);
@@ -238,30 +240,35 @@ public class LogFactory {
             Level lev = Level.toLevel(level);
             if (Level.TRACE.isGreaterOrEqual(lev)) {
                 modules.put(Level.TRACE.toString(), true);
-            } else {
+            }
+            else {
                 modules.put(Level.TRACE.toString(), false);
             }
             if (Level.DEBUG.isGreaterOrEqual(lev)) {
                 modules.put(Level.DEBUG.toString(), true);
-            } else {
+            }
+            else {
                 modules.put(Level.DEBUG.toString(), false);
             }
 
             if (Level.INFO.isGreaterOrEqual(lev)) {
                 modules.put(Level.INFO.toString(), true);
-            } else {
+            }
+            else {
                 modules.put(Level.INFO.toString(), false);
             }
 
             if (Level.WARN.isGreaterOrEqual(lev)) {
                 modules.put(Level.WARN.toString(), true);
-            } else {
+            }
+            else {
                 modules.put(Level.WARN.toString(), false);
             }
 
             if (Level.ERROR.isGreaterOrEqual(lev)) {
                 modules.put(Level.ERROR.toString(), true);
-            } else {
+            }
+            else {
                 modules.put(Level.ERROR.toString(), false);
             }
             return modules;
@@ -269,6 +276,10 @@ public class LogFactory {
 
         public static void setThreshold(String level) {
             LoggerWrapper.setThreshold(Level.toLevel(level));
+        }
+
+        public static void setThreshold(Level level) {
+            LoggerWrapper.setThreshold(level);
         }
 
         public static Level getThreshold() {
@@ -279,5 +290,4 @@ public class LogFactory {
             return logName;
         }
     }
-
 }
