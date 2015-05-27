@@ -61,7 +61,8 @@ public class LogFactory {
     }
 
     /**
-     * @param configName default value "zollty-log.properties"
+     * @param configName
+     *            default value "zollty-log.properties"
      */
     public static void refreshZolltyLogConfig(final String configName) {
         InputStream in = null;
