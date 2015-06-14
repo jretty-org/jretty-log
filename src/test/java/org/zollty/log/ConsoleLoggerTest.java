@@ -19,16 +19,16 @@ public class ConsoleLoggerTest {
         
     }
     
-    public static void basicLogTest(){
-        BasicLog log = new ConsoleLogger(ConsoleLoggerTest.class.getName());
-        
+    public static void basicLogTest() {
+        BasicLog log = new ConsoleLogger("org.zollty.log.test");
+
         log.debug("===========debug Level=============");
-        log.info( "===========info  Level=============");
+        log.info("===========info  Level=============");
         log.warn("============warn  Level============");
         log.error("===========error Level=============");
         log.error("hello {}, now time is {}. ", "guys", new java.util.Date());
     }
-    
+
     public static void parrentTest() {
         Map<String, Level> parentLoggers = new TreeMap<String, Level>(new Comparator<String>() {
             @Override
@@ -36,10 +36,10 @@ public class ConsoleLoggerTest {
                 return obj2.compareTo(obj1); // 降序排序
             }
         });
-        parentLoggers.put("org.zollty.log.test", Level.toLevel("WARN"));
-        
+        parentLoggers.put("org.zollty", Level.toLevel("WARN"));
+
         ConsoleAppender.setParentLoggers(parentLoggers);
-        
+
         System.out.println("==================parrentTest================");
         basicLogTest();
         System.out.println("==================parrentTest================");
