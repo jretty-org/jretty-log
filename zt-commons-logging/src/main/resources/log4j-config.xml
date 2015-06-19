@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- 
+		综合说明：
+		1、将所有级别的日志信息，输出到proj-debug.log文件中和控制台(console)上。
+		2、将所有INFO及以上级别的日志信息，输出到proj-info.log文件中，备份起来，方便以后查看。
+		3、将ERROR级别的日志，单独输出到一个proj-error.log的文件中，方便查看。
+		4、可以将所有订单(order)相关的日志信息，再输出一份到单独的proj-order.log文件中。
+		5、可以将所有用户(user )相关的日志信息，再输出一份到单独的proj-user.log文件中。
+		根据以上的需求，配置如下：
+			配置一个debugAppender和stdoutAppender，以及infoAppender和errorAppender，附属于rootLogger下面。
+			配置两个父Logger：mod.order和mod.user，以及orderModulAppender和userModulAppender，Logger和Appender一一对应。
+	 -->
+	
+	<!-- 必要的时候还是可以通过修改设置把信息输出到 控制台 -->
+	<appender name="stdoutAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<!-- 默认INFO，可以动态修改成DEBUG -->
+		<param name="threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较详细且格式化的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="debugAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+		<param name="File" value="/opt/applog/proj-debug.log" />
+		<!-- 默认DEBUG，可以动态修改成TRACE -->
+		<param name="threshold" value="DEBUG" />
+		<!-- 默认按小时(HH)分割文件名 -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH" />
+		<param name="append" value="true" />
+		<!-- 512 Byte为一个写单元，提高日志写入文件的效率
+        <param name="BufferedIO" value="true" />
+        <param name="BufferSize" value="512" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较详细且格式化的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+    
+    <appender name="infoAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">  
+        <param name="File" value="/opt/applog/proj-info.log" /> 
+        <param name="threshold" value="INFO" />  
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="append" value="true" />
+        <!-- 512 Byte为一个写单元，提高日志写入文件的效率
+        <param name="BufferedIO" value="true" />
+        <param name="BufferSize" value="512" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较高效的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %p %c{1} - %m%n" />
+		</layout>
+    </appender>
+  	
+    <appender name="errorAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+        <param name="File" value="/opt/applog/proj-error.log" />
+        <param name="threshold" value="ERROR" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="append" value="true" />
+        <!-- 512 Byte为一个写单元，提高日志写入文件的效率
+        <param name="BufferedIO" value="true" />
+        <param name="BufferSize" value="512" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较高效的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %p %c{1} - %m%n" />
+		</layout>
+    </appender>
+	
+	<!-- order模块专用的Appender -->
+	<appender name="orderModulAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+        <param name="File" value="/opt/applog/proj-modul-order.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="append" value="true" />
+        <!-- 512 Byte为一个写单元，提高日志写入文件的效率
+        <param name="BufferedIO" value="true" />
+        <param name="BufferSize" value="512" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较高效的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %p %c{1} - %m%n" />
+		</layout>
+    </appender>
+    <!-- user模块专用的Appender -->
+    <appender name="userModulAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+        <param name="File" value="/opt/applog/proj-modul-user.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <param name="append" value="true" />
+        <!-- 512 Byte为一个写单元，提高日志写入文件的效率
+        <param name="BufferedIO" value="true" />
+        <param name="BufferSize" value="512" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 默认用比较高效的输出格式 -->
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %p %c{1} - %m%n" />
+		</layout>
+    </appender>
+    
+    <!-- parent logger for all classes under this package -->
+    <!-- 订单模块的父logger（Package ID为 mod.order） -->
+	<logger name="mod.order" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="orderModulAppender" />
+		<appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
+        <appender-ref ref="debugAppender"/>
+        <appender-ref ref="stdoutAppender"/>
+	</logger>
+	<!-- 用户模块的父logger（Package ID为 mod.user） -->
+	<logger name="mod.user" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="userModulAppender" />
+		<appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
+        <appender-ref ref="debugAppender"/>
+        <appender-ref ref="stdoutAppender"/>
+	</logger>
+	
+	
+    <root>
+    	<!-- 默认输出为INFO级别 -->
+        <level value="INFO" />
+        <!-- <appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
+        <appender-ref ref="debugAppender"/> -->
+        <appender-ref ref="stdoutAppender"/>
+    </root> 
+
+</log4j:configuration>
