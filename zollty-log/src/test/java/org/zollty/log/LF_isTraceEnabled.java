@@ -11,17 +11,17 @@ private static final Logger LOG = LogFactory.getLogger();
     public void isTraceEnabledTest() {
         Logger logger = LOG;
         
-        LogFactory.refreshZolltyLogConfig(LogManager.DEFAULT_CONFIG_PATH);
+        LogFactory.LogManager.refreshZolltyLogConfig(LogManager.DEFAULT_CONFIG_PATH);
         
         // $$ 正常输出 $$
-        if(LogFactory.isTraceEnabled()) {
+        if(logger.isTraceEnabled()) {
             System.out.println("-----------isTraceEnabled-------------");
         }
         
         // change to Log4jLogger
-        LogFactory.refreshZolltyLogConfig("zollty-log-spec.properties");
+        LogFactory.LogManager.refreshZolltyLogConfig("zollty-log-spec.properties");
         
-        // $$ 无输出 $$
+        // $$ LOG4J无输出 $$
         if(logger.isTraceEnabled()) {
             System.out.println("-----------isTraceEnabled-------------");
         }
