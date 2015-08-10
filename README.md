@@ -5,7 +5,7 @@ The ZolltyLog is a simple, generic and flexible logging library for Java, which 
 
 ### Easy to use
 
-	For example:
+For example:
 
 ```java
   public static final Logger LOG = LogFactory.getLogger(); // Concise definition
@@ -19,4 +19,4 @@ The ZolltyLog is a simple, generic and flexible logging library for Java, which 
 
 ###  Some advanced usages
 
-	See the [manual](http://blog.zollty.com/b/archive/2014/07/zollty-log-use-manual.html) and [docs](http://www.zollty.com/zollty-log/apidocs/).
+See the [manual](http://blog.zollty.com/b/archive/2014/07/zollty-log-use-manual.html) and [docs](http://www.zollty.com/zollty-log/apidocs/).
