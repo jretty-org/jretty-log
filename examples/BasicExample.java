@@ -17,7 +17,7 @@ public class BasicExample {
         LOG.warn("============warn中文测试============");
         LOG.error("===========error Level=============");
 
-		// 支持参数的占位符
+        // 支持参数的占位符
         LOG.error("hello {}, now time is {}. ", "guys", new java.util.Date());
 
         if( LOG.isDebugEnabled() ){
