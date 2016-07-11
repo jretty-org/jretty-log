@@ -60,13 +60,13 @@ public class ConsoleLogger extends ConsoleAppender {
     @Override
     public void info(Object message, Object... msgParams) {
         // if(Level.INFO.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.INFO, null);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.INFO, null);
     }
 
     @Override
     public void info(Throwable e, Object message, Object... msgParams) {
         // if(Level.INFO.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.INFO, e);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.INFO, e);
     }
 
     @Override
@@ -90,13 +90,13 @@ public class ConsoleLogger extends ConsoleAppender {
     @Override
     public void warn(Object message, Object... msgParams) {
         // if(Level.WARN.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.WARN, null);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.WARN, null);
     }
 
     @Override
     public void warn(Throwable e, Object message, Object... msgParams) {
         // if(Level.WARN.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.WARN, e);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.WARN, e);
     }
 
     @Override
@@ -120,13 +120,13 @@ public class ConsoleLogger extends ConsoleAppender {
     @Override
     public void error(Object message, Object... msgParams) {
         // if(Level.ERROR.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.ERROR, null);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.ERROR, null);
     }
 
     @Override
     public void error(Throwable e, Object message, Object... msgParams) {
         // if(Level.ERROR.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.ERROR, e);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.ERROR, e);
     }
 
     @Override
@@ -150,13 +150,13 @@ public class ConsoleLogger extends ConsoleAppender {
     @Override
     public void debug(Object message, Object... msgParams) {
         // if(Level.DEBUG.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.DEBUG, null);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.DEBUG, null);
     }
 
     @Override
     public void debug(Throwable e, Object message, Object... msgParams) {
         // if(Level.DEBUG.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.DEBUG, e);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.DEBUG, e);
     }
 
     @Override
@@ -180,18 +180,18 @@ public class ConsoleLogger extends ConsoleAppender {
     @Override
     public void trace(Object message, Object... msgParams) {
         // if(Level.TRACE.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.TRACE, null);
+		add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.TRACE, null);
     }
 
     @Override
     public void trace(Throwable e, Object message, Object... msgParams) {
         // if(Level.TRACE.isGreaterOrEqual(level))
-        add(LogUtils.replace(message.toString(), msgParams), className, Level.TRACE, e);
+        add(LogUtils.replace(message != null ? message.toString() : null, msgParams), className, Level.TRACE, e);
     }
 
     @Override
     public void log(String callerFQCN, Level level, Throwable t, Object msg, Object... msgParams) {
-        add(LogUtils.replace(msg.toString(), msgParams), className, level, t);
+        add(LogUtils.replace(msg != null ? msg.toString() : null, msgParams), className, level, t);
     }
 
 
