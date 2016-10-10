@@ -201,8 +201,12 @@ public class LogFactory {
 
                 ConsoleAppender.setGlobalLevel(threshold);
                 String classNameLayout = pmap.get("appender.STDOUT.layout.className");
-                if( classNameLayout!=null ) {
+                if (classNameLayout != null) {
                     ConsoleAppender.setClassNameLayout(classNameLayout);
+                }
+                String showThread = pmap.get("appender.STDOUT.layout.showThread");
+                if( showThread!=null && "true".equalsIgnoreCase(showThread)) {
+                    ConsoleAppender.setShowThread(true);
                 }
             }
             else if (Log4jLogger.LOG_NAME.equalsIgnoreCase(appenderFlag) 

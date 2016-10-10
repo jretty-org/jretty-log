@@ -28,6 +28,7 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
     protected static Level globalLevel = Level.DEBUG;
     private static final String MSG_SPLIT = " |- ";
     private static String classNameLayout;
+    private static boolean showThread;
 
     protected boolean isEffectiveLevel(Level level) {
         return level.isGreaterOrEqual(globalLevel);
@@ -42,6 +43,11 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
         // if( isTraceEnabled() ) System.err.println("===============================================================================================");
         StringBuilder sb = new StringBuilder();
         sb.append(LogUtils.format(new Date()));
+        if (showThread) {
+            sb.append(" [");
+            sb.append(Thread.currentThread().getName());
+            sb.append("]");
+        }
         sb.append(" [");
         sb.append(level);
         sb.append("] ");
@@ -78,6 +84,10 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
 
     public static void setClassNameLayout(String classNameLayout) {
         ConsoleAppender.classNameLayout = classNameLayout;
+    }
+    
+    public static void setShowThread(boolean showThread) {
+        ConsoleAppender.showThread = showThread;
     }
 
     // --------- helper methods for this class-------
