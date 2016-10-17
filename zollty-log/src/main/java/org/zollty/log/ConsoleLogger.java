@@ -217,4 +217,129 @@ public class ConsoleLogger extends ConsoleAppender {
         return className;
     }
 
+    @Override
+    public void trace(Object message, Object p0) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7, p8), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9), 
+                className, Level.TRACE, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0), className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7, p8), 
+                className, Level.DEBUG, null);
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9) {
+        add(LogUtils.replace(message != null ? message.toString() : null, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9), 
+                className, Level.DEBUG, null);
+    }
+
 }

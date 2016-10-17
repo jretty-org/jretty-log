@@ -76,5 +76,52 @@ public interface BasicLog {
     void error(Object message, Object... msgParams);
 
     void error(Throwable e, Object message, Object... msgParams);
+    
+    
+    // ~ extends
+    
+    void trace(Object message, Object p0);
+    
+    void trace(Object message, Object p0, Object p1);
+
+    void trace(Object message, Object p0, Object p1, Object p2);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+    
+    void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
+    
+    void debug(Object message, Object p0);
+    
+    void debug(Object message, Object p0, Object p1);
+
+    void debug(Object message, Object p0, Object p1, Object p2);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+    
+    void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
 
 }

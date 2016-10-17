@@ -412,4 +412,170 @@ public class LoggerWrapper implements Logger, LoggerWrapperAPI, Serializable {
         return name;
     }
 
+    @Override
+    public void trace(Object message, Object p0) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4, p5);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4, p5, p6);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4, p5, p6, p7);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        }
+    }
+
+    @Override
+    public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9) {
+        if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
+            LoggerManager.traceIncrement(name);
+            this.logger.trace(message, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4, p5);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4, p5, p6);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4, p5, p6, p7);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4, p5, p6, p7, p8);
+        }
+    }
+
+    @Override
+    public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9) {
+        if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
+            LoggerManager.debugIncrement(name);
+            this.logger.debug(message, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+        }
+    }
+
 }

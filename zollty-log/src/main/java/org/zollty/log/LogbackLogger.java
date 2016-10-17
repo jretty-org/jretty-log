@@ -15,24 +15,20 @@
 package org.zollty.log;
 
 import java.io.Serializable;
-import java.net.URL;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Priority;
-import org.apache.log4j.xml.DOMConfigurator;
+import org.slf4j.impl.StaticLoggerBinder;
+import org.slf4j.spi.LocationAwareLogger;
 
 /**
  * @author zollty
  * @since 2013-6-22
  */
-public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serializable {
+public class LogbackLogger implements org.zollty.log.Logger, LoggerSupport, Serializable {
 
     private static final long serialVersionUID = -226607492227272649L;
-
-    public static String configConfigLocation = "log4j-config.xml";
-
-    public static final String LOG_NAME = "LOG4J";
-
+    
+    public static final String LOG_NAME = "LOGBACK";
+    
     private static final String FQCN = LoggerWrapper.class.getName();
 
     /** Logger name */
@@ -41,233 +37,203 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     /**
      * The underlying Logger implementation we are using.
      */
-    protected transient volatile org.apache.log4j.Logger logger = null;
-
-    private static final Level traceLevel;
-
+    protected transient volatile org.slf4j.Logger logger = null;
+    
     static {
-        if (!Priority.class.isAssignableFrom(Level.class)) {
-            // nope, this is log4j 1.3, so force an ExceptionInInitializerError
-            throw new InstantiationError("Log4J 1.2 not available");
-        }
-
-        // Releases of log4j1.2 >= 1.2.12 have Priority.TRACE available, earlier
-        // versions do not. If TRACE is not available, then we have to map
-        // calls to Log.trace(...) onto the DEBUG level.
-
-        Level _traceLevel;
-        try {
-            _traceLevel = (Level) Level.class.getDeclaredField("TRACE").get(null);
-        } catch (Exception ex) {
-            // ok, trace not available
-            _traceLevel = Level.DEBUG;
-        }
-        traceLevel = _traceLevel;
+        org.slf4j.LoggerFactory.getLogger(LogbackLogger.class);
     }
 
     /**
      * Return the native Logger instance we are using.
      */
-    public org.apache.log4j.Logger getLogger() {
-        org.apache.log4j.Logger result = logger;
-        if (result == null) {
-            synchronized (this) {
-                result = logger;
-                if (result == null) {
-                    logger = result = org.apache.log4j.Logger.getLogger(name);
-                }
-            }
-        }
-        return result;
+    public org.slf4j.Logger getLogger() {
+        return StaticLoggerBinder.getSingleton().getLoggerFactory().getLogger(name);
     }
 
-    public Log4jLogger() {
+    public LogbackLogger() {
         this.name = null;
     }
 
-    public Log4jLogger(String name) {
+    public LogbackLogger(String name) {
         this.name = name;
         this.logger = getLogger();
     }
 
     @Override
     public org.zollty.log.Logger newInstance(String name) {
-        return new Log4jLogger(name);
-    }
-
-    public static void refreshLog4jConfig() {
-        URL url = LogUtils.getResource(configConfigLocation);
-        if (url != null) {
-            DOMConfigurator.configure(url);
-        }
+        return new LogbackLogger(name);
     }
 
     @Override
     public void info(Object message) {
-        getLogger().log(FQCN, Level.INFO, message, null);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(message), null, null);
     }
 
     @Override
     public void info(Throwable e) {
-        getLogger().log(FQCN, Level.INFO, null, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.INFO_INT, null, null, e);
     }
 
     @Override
     public void info(Throwable e, Object message) {
-        getLogger().log(FQCN, Level.INFO, message, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(message), null, e);
     }
 
     @Override
     public void info(Object message, Object... msgParams) {
         if (getLogger().isInfoEnabled()) {
-            getLogger().log(FQCN, Level.INFO, LogUtils.replace(message.toString(), msgParams), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(message), msgParams, null);
         }
     }
 
     @Override
     public void info(Throwable e, Object message, Object... msgParams) {
         if (getLogger().isInfoEnabled()) {
-            getLogger().log(FQCN, Level.INFO, LogUtils.replace(message.toString(), msgParams), e);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(message), msgParams, e);
         }
     }
 
     @Override
     public void warn(Object message) {
-        getLogger().log(FQCN, Level.WARN, message, null);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.WARN_INT, String.valueOf(message), null, null);
     }
 
     @Override
     public void warn(Throwable e) {
-        getLogger().log(FQCN, Level.WARN, null, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.WARN_INT, null, null, e);
     }
 
     @Override
     public void warn(Throwable e, Object message) {
-        getLogger().log(FQCN, Level.WARN, message, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.WARN_INT, String.valueOf(message), null, e);
     }
 
     @Override
     public void warn(Object message, Object... msgParams) {
-        if (getLogger().isEnabledFor(Level.WARN)) {
-            getLogger().log(FQCN, Level.WARN, LogUtils.replace(message.toString(), msgParams), null);
+        if (getLogger().isWarnEnabled()) {
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.WARN_INT, String.valueOf(message), msgParams, null);
         }
     }
 
     @Override
     public void warn(Throwable e, Object message, Object... msgParams) {
-        if (getLogger().isEnabledFor(Level.WARN)) {
-            getLogger().log(FQCN, Level.WARN, LogUtils.replace(message.toString(), msgParams), e);
+        if (getLogger().isWarnEnabled()) {
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.WARN_INT, String.valueOf(message), msgParams, e);
         }
     }
 
     @Override
     public void error(Object message) {
-        getLogger().log(FQCN, Level.ERROR, message, null);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.ERROR_INT, String.valueOf(message), null, null);
     }
 
     @Override
     public void error(Throwable e) {
-        getLogger().log(FQCN, Level.ERROR, null, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.ERROR_INT, null, null, e);
     }
 
     @Override
     public void error(Throwable e, Object message) {
-        getLogger().log(FQCN, Level.ERROR, message, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.ERROR_INT, String.valueOf(message), null, e);
     }
 
     @Override
     public void error(Object message, Object... msgParams) {
-        getLogger().log(FQCN, Level.ERROR, LogUtils.replace(message.toString(), msgParams), null);
+        if (getLogger().isErrorEnabled()) {
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.ERROR_INT, String.valueOf(message), msgParams, null);
+        }
     }
 
     @Override
     public void error(Throwable e, Object message, Object... msgParams) {
-        getLogger().log(FQCN, Level.ERROR, LogUtils.replace(message.toString(), msgParams), e);
+        if (getLogger().isErrorEnabled()) {
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.ERROR_INT, String.valueOf(message), msgParams, e);
+        }
     }
 
     @Override
     public void debug(Object message) {
-        getLogger().log(FQCN, Level.DEBUG, message, null);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(message), null, null);
     }
 
     @Override
     public void debug(Throwable e) {
-        getLogger().log(FQCN, Level.DEBUG, null, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, null, null, e);
     }
 
     @Override
     public void debug(Throwable e, Object message) {
-        getLogger().log(FQCN, Level.DEBUG, message, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(message), null, e);
     }
 
     @Override
     public void debug(Object message, Object... msgParams) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, LogUtils.replace(message.toString(), msgParams), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(message), msgParams, null);
         }
     }
 
     @Override
     public void debug(Throwable e, Object message, Object... msgParams) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, LogUtils.replace(message.toString(), msgParams), e);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(message), msgParams, e);
         }
     }
 
     @Override
     public void trace(Object message) {
-        getLogger().log(FQCN, traceLevel, message, null);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, String.valueOf(message), null, null);
     }
 
     @Override
     public void trace(Throwable e) {
-        getLogger().log(FQCN, traceLevel, null, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, null, null, e);
     }
 
     @Override
     public void trace(Throwable e, Object message) {
-        getLogger().log(FQCN, traceLevel, message, e);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, String.valueOf(message), null, e);
     }
 
     @Override
     public void trace(Object message, Object... msgParams) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), msgParams), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, String.valueOf(message), msgParams, null);
         }
     }
 
     @Override
     public void trace(Throwable e, Object message, Object... msgParams) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), msgParams), e);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, String.valueOf(message), msgParams, e);
         }
     }
 
     @Override
     public void log(String callerFQCN, org.zollty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
-        Level level;
+        int level;
         if (org.zollty.log.Level.TRACE.isGreaterOrEqual(lev)) {
-            level = traceLevel;
+            level = LocationAwareLogger.TRACE_INT;
         }
         else if (org.zollty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
-            level = Level.DEBUG;
+            level = LocationAwareLogger.DEBUG_INT;
         }
         else if (org.zollty.log.Level.INFO.isGreaterOrEqual(lev)) {
-            level = Level.INFO;
+            level = LocationAwareLogger.INFO_INT;
         }
         else if (org.zollty.log.Level.WARN.isGreaterOrEqual(lev)) {
-            level = Level.WARN;
+            level = LocationAwareLogger.WARN_INT;
         }
         else if (org.zollty.log.Level.ERROR.isGreaterOrEqual(lev)) {
-            level = Level.ERROR;
+            level = LocationAwareLogger.ERROR_INT;
         }
         else if (org.zollty.log.Level.FATAL.isGreaterOrEqual(lev)) {
-            level = Level.FATAL;
+            level = LocationAwareLogger.ERROR_INT;
         }
         else {
             throw new IllegalStateException("Level " + lev + " is not recognized.");
         }
-        logger.log(callerFQCN, level, msg, t);
+        ((LocationAwareLogger)getLogger()).log(null, FQCN, level, String.valueOf(msg), msgParams, t);
     }
 
     @Override
@@ -293,52 +259,56 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     @Override
     public void trace(Object message, Object p0) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), p0), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), p0, p1), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), p0, p1, p2), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, LogUtils.replace(message.toString(), p0, p1, p2, p3), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5}, null);
         }
     }
 
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6}, null);
         }
     }
 
@@ -346,8 +316,8 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7}, null);
         }
     }
 
@@ -355,72 +325,73 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7, Object p8) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7, p8), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7, p8}, null);
         }
     }
-
+    
     @Override
     public void trace(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7, Object p8, Object p9) {
         if (getLogger().isTraceEnabled()) {
-            getLogger().log(FQCN, traceLevel, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7, p8, p9), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.TRACE_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7, p8, p9}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, LogUtils.replace(message.toString(), p0), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5}, null);
         }
     }
 
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6}, null);
         }
     }
 
@@ -428,8 +399,8 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7}, null);
         }
     }
 
@@ -437,17 +408,17 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7, Object p8) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7, p8), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7, p8}, null);
         }
     }
-
+    
     @Override
     public void debug(Object message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
             Object p7, Object p8, Object p9) {
         if (getLogger().isDebugEnabled()) {
-            getLogger().log(FQCN, Level.DEBUG, 
-                    LogUtils.replace(message.toString(), p0, p1, p2, p3, p4, p5, p6, p7, p8, p9), null);
+            ((LocationAwareLogger)getLogger()).log(null, FQCN, LocationAwareLogger.DEBUG_INT, 
+                    String.valueOf(message), new Object[]{p0, p1, p2, p3, p4, p5, p6, p7, p8, p9}, null);
         }
     }
 

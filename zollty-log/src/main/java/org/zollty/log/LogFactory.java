@@ -218,6 +218,11 @@ public class LogFactory {
                 Log4jLogger.refreshLog4jConfig();
 
             }
+            else if (LogbackLogger.LOG_NAME.equalsIgnoreCase(appenderFlag) 
+                    || LogbackLogger.class.getName().equals(appenderFlag)) {
+
+                LogManager.reset(LogbackLogger.LOG_NAME, threshold, new LogbackLogger(), parentLoggers);
+            }
             else if (appenderFlag != null && appenderFlag.length() > 0) {
 
                 LogManager.reset(appenderFlag, threshold, LogUtils.createLogCreator(appenderFlag),
