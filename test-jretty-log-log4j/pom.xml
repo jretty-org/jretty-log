@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Licensed under the Apache License, Version 2.0 (the "License").
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   Create by Zollty Tsou (Contact: zollty@163.com, http://blog.zollty.com)
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.zollty</groupId>
+    <artifactId>zollty-log-parent</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>test-jretty-log-log4j</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0</version>
+
+  <dependencies>
+  
+    <dependency>
+      <groupId>org.zollty</groupId>
+      <artifactId>zollty-log</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
+    
+    <!-- ──────────────────────────────START three-part api───────────────────────────────────┒ -->
+    <dependency>
+      <groupId>org.jretty</groupId>
+      <artifactId>jretty-slf4j</artifactId>
+      <version>1.7.12</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/../dist/jretty-slf4j-1.7.12.jar</systemPath>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.jretty</groupId>
+      <artifactId>jretty-commons-logging</artifactId>
+      <version>1.2.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/../dist/jretty-commons-logging-1.2.0.jar</systemPath>
+    </dependency>
+    <!-- 注意：如果用jretty-log+log4j组合，则不能有slf4j的各种over-api（桥接API），比如log4j-over-slf4j、jcl-over-slf4j -->
+    <!-- ──────────────────────────────END  three-part api────────────────────────────────────┚ -->
+
+    <!-- For Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+
+      <!-- 生成javadoc-绑定到install阶段
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin> -->
+
+      <!-- 打包源代码-绑定到install阶段 -->
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

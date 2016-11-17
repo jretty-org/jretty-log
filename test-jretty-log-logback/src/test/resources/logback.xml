@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+  <if condition='isDefined("catalina.base")'>
+    <then>
+      <property file="${catalina.base}/conf/logback_val.properties" />
+    </then>
+    <else>
+      <property resource="./conf/logback_val.properties" />
+    </else>
+  </if>
+
+  <!-- 部署的环境类型：dev、test、product -->
+  <property name="DEPLOY_ENV" value="${deploy.env:-dev}" />
+
+  <!-- 日志路径，这里是相对路径，web项目eclipse下会输出到当前目录./logs/下，如果部署到linux上的tomcat下，会输出到tomcat/logs/目录 下 -->
+  <property name="LOG_HOME" value="${catalina.base:-.}/logs" />
+  
+  <!-- 日志文件大小,超过这个大小将被压缩 -->
+  <property name="LOG_MAX_SIZE" value="100MB" />
+  <!-- 日志输出格式 -->
+  <property name="LOG_COMMON_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] [%level] %logger - %msg%n" />
+  <property name="LOG_DEV_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{48}:%line - %msg%n" />
+
+  <!-- 主日志级别 -->
+  <property name="ROOT_LEVEL" value="${log.root.level:-DEBUG}" />
+  
+  <!-- APP 日志级别 -->
+  <property name="APP_LEVEL" value="${log.app.level:-TRACE}" />
+  <!-- APP Package 前缀： com.zollty.lightning -->
+  <property name="APP_PACKAGE" value="test" />
+
+  <include resource="includedConfig.xml"/>
+  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${LOG_DEV_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="${APP_PACKAGE}" level="${APP_LEVEL}" />
+
+  <root level="${ROOT_LEVEL}">
+    <!-- Required: exception log -->
+    <appender-ref ref="FILE_EXCEPTION"/>
+    <!-- Required: app log  -->
+    <appender-ref ref="FILE_APP"/>
+    
+    <!-- Optional： show all debug or trace info -->
+    <appender-ref ref="FILE_DEBUG"/>
+    <appender-ref ref="FILE_TRACE"/>
+    
+    <if condition='p("DEPLOY_ENV").contains("dev")'>
+      <then>
+        <appender-ref ref="STDOUT" />
+      </then>
+    </if>
+    
+  </root>
+
+</configuration>

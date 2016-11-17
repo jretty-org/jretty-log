@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<included>
+
+  <!-- WARN and ERROR -->
+  <appender name="FILE_EXCEPTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+    <file>${LOG_HOME}/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>${LOG_HOME}/error/error-%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+      <maxHistory>90</maxHistory>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <!-- or whenever the file size reaches 100MB -->
+        <MaxFileSize>${LOG_MAX_SIZE}</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${LOG_COMMON_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- INFO or Greater -->
+  <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+    <file>${LOG_HOME}/info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_HOME}/info/info-%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+      <maxHistory>50</maxHistory>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>${LOG_MAX_SIZE}</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${LOG_COMMON_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- DEBUG or Greater-->
+  <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+    <file>${LOG_HOME}/debug.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_HOME}/debug/debug-%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+      <maxHistory>50</maxHistory>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>${LOG_MAX_SIZE}</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${LOG_COMMON_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- TRACE and ALL -->
+  <appender name="FILE_TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_HOME}/trace.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_HOME}/trace/trace-%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+      <maxHistory>10</maxHistory>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>${LOG_MAX_SIZE}</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${LOG_COMMON_PATTERN}</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- (INFO or Greater) or logname prefix = ${APP_PACKAGE} -->
+  <appender name="FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+      <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+        <expression>return level>=INFO || logger.startsWith("${APP_PACKAGE}");</expression>
+      </evaluator>
+      <OnMismatch>DENY</OnMismatch>
+      <OnMatch>NEUTRAL</OnMatch>
+    </filter>
+    <file>${LOG_HOME}/app.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_HOME}/app/app-%d{yyyy-MM-dd}-%i.log.zip</fileNamePattern>
+      <maxHistory>90</maxHistory>
+      <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <MaxFileSize>${LOG_MAX_SIZE}</MaxFileSize>
+      </TimeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${LOG_COMMON_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+</included>

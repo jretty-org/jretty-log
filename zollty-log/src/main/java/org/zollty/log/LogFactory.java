@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentMap;
 public class LogFactory {
 
     private static String logName;
-    private static LoggerSupport logCreator = null;
+    private volatile static LoggerSupport logCreator;
     private static final String LOGFACTORY_CLASS_NAME = LogFactory.class.getName();
 
     static {
@@ -55,14 +55,6 @@ public class LogFactory {
      */
     public static Logger getLogger() {
         StackTraceElement[] sts = Thread.currentThread().getStackTrace();
-        // if (LogUtils.isAndroid()) {
-        // for (int i = 0; i < sts.length; i++) {
-        // if (sts[i].getClassName().equals(LogFactory.class.getName())) {
-        // return getLogger(sts[i + 1].getClassName());
-        // }
-        // }
-        // }
-        // return getLogger(sts[2].getClassName());
         for (int i = 0; i < sts.length; i++) {
             if (LOGFACTORY_CLASS_NAME.equals(sts[i].getClassName())) {
                 return getLogger(sts[i + 1].getClassName());
@@ -77,50 +69,6 @@ public class LogFactory {
         }
         LoggerWrapper logger = new LoggerWrapper(logCreator.newInstance(name));
         return logger;
-        // synchronized (LogManager.cacheLoggerMap) {
-        // LoggerInfo loggerInfo = LogManager.cacheLoggerMap.get(name);
-        // if (loggerInfo != null) {
-        // return loggerInfo.getLogger();
-        // }
-        // LoggerWrapper logger = new LoggerWrapper(logCreator.newInstance(name));
-        // LoggerInfo oldInstance = LogManager.cacheLoggerMap.putIfAbsent(name, new LoggerInfo(logger));
-        //
-        // // 之前没有，则使用新的，否则使用以前的旧Logger
-        // return oldInstance == null ? logger : oldInstance.getLogger();
-        // }
-    }
-
-    // 与Logger的level共同起作用
-    // private static boolean traceEnabled, debugEnabled, infoEnabled;
-    /**
-     * just return false, and will be removed in the later version. Replacing with {@code logger.isTraceEnabled()}
-     */
-    @Deprecated
-    public static boolean isTraceEnabled() {
-        return false;
-    }
-    /**
-     * just return false, and will be removed in the later version. Replacing with {@code logger.isDebugEnabled()}
-     */
-    @Deprecated
-    public static boolean isDebugEnabled() {
-        return false;
-    }
-    /**
-     * just return false, and will be removed in the later version. Replacing with {@code logger.isInfoEnabled()}
-     */
-    @Deprecated
-    public static boolean isInfoEnabled() {
-        return false;
-    }
-
-    /**
-     * just return false, and will be removed in the later version. Replacing with {@code logger.isInfoEnabled()}
-     */
-    @Deprecated
-    public static boolean isEnabledFor(String moduleId) {
-        return false;
-        // return LogManager.isEnabledFor(moduleId);
     }
 
     public static class LogManager {
@@ -135,8 +83,6 @@ public class LogFactory {
         public static final String SPECIFY_CONFIG_PATH = "zollty-log.properties";
         
         public static boolean debug = true;
-        
-        // private static Map<String, Boolean> logModules = new HashMap<String, Boolean>();
         
         public synchronized static void refreshZolltyLogConfig(final String configName) {
             InputStream in = null;
@@ -238,7 +184,7 @@ public class LogFactory {
 //                LogManager.reset(null, threshold, null, parentLoggers);
 //            }
             
-            pmap.put("##rootLogger=", threshold+","+LogManager.getLogName());
+            pmap.put("##rootLogger=", threshold + "," + LogManager.getLogName());
             LogManager.storeConfigContent(pmap);
 
             if (logCreator == null) {
@@ -269,9 +215,24 @@ public class LogFactory {
                 props = null;
             }
             if (!refreshed) {
-                LogManager.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'OFF'.");
                 Map<String, String> pmap = new HashMap<String, String>();
-                pmap.put("rootLogger", "OFF,"+ConsoleLogger.LOG_NAME);
+                try {
+                    Class.forName("ch.qos.logback.classic.LoggerContext");
+                    pmap.put("rootLogger", "TRACE,"+LogbackLogger.LOG_NAME);
+                    LogManager.report("WARN: No log Config was found, 'LogbackLogger' will be used and threshold level is 'OFF'.");
+                } catch (ClassNotFoundException e) {
+                    // ignore
+                    try {
+                        Class.forName("org.apache.log4j.Logger");
+                        pmap.put("rootLogger", "ALL,"+Log4jLogger.LOG_NAME);
+                        LogManager.report("WARN: No log Config was found, 'Log4jLogger' will be used and threshold level is 'OFF'.");
+                    } catch (ClassNotFoundException es) {
+                        // ignore
+                        pmap.put("rootLogger", "OFF,"+ConsoleLogger.LOG_NAME);
+                        LogManager.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'OFF'.");
+                    }
+                }
+                
                 LogManager.refreshZolltyLogConfig(pmap);
             }
         }
@@ -282,29 +243,12 @@ public class LogFactory {
             LogManager.refreshZolltyLogConfig(cmap);
         }
 
-        /**
-         * @deprecated use LogFactory.refreshZolltyLogConfig instead
-         */
-        public synchronized static void init(String logName, String level) {
-            // if (isInited) {
-            // throw new IllegalStateException("already initialized, don't allow initialize again.");
-            // }
-            Map<String, String> cmap = new HashMap<String, String>();
-            cmap.put("rootLogger", level+","+logName);
-            LogManager.refreshZolltyLogConfig(cmap);
-            //LogManager.reset(logName, level, LogUtils.createLogCreator(logName), new TreeMap<String, Level>());
-
-            // isInited = true;
-        }
-
         public static void setThreshold(String level) {
             LoggerWrapper.setThreshold(Level.toLevel(level));
-            // updateLevelModuleMap(level);
         }
         
         public static void setThreshold(Level level) {
             LoggerWrapper.setThreshold(level);
-            // updateLevelModuleMap(level.toString());
         }
 
         public static Level getThreshold() {
@@ -350,13 +294,22 @@ public class LogFactory {
         // 更新所有已存在的logger
         private static void reloadLogger() {
             Set<Entry<String, LoggerWrapper>> entrySet = LogManager.cacheLoggerMap.entrySet();
-            for(Entry<String, LoggerWrapper> entry: entrySet) {
+            Map<String, Logger> newMap = new HashMap<String, Logger>();
+            for (Entry<String, LoggerWrapper> entry : entrySet) {
+                newMap.put(entry.getKey(), logCreator.newInstance(entry.getKey()));
+            }
+            Set<Entry<String, LoggerWrapper>> entrySet2 = LogManager.cacheLoggerMap.entrySet();
+            for (Entry<String, LoggerWrapper> entry : entrySet2) {
                 // 用新logCreator生成的实例，替换原来的Logger
-                entry.getValue().setLogger( logCreator.newInstance(entry.getKey()) );
+                if (newMap.containsKey(entry.getKey())) {
+                    entry.getValue().setLogger(newMap.get(entry.getKey()));
+                } else {
+                    entry.getValue().setLogger(logCreator.newInstance(entry.getKey()));
+                }
             }
         }
         
-        private static String configContent = null;
+        private static String configContent;
         private static Map<String, String> configMap = new HashMap<String, String>();
         
         private static void storeConfigContent(Map<String, String> pmap) {
@@ -387,123 +340,6 @@ public class LogFactory {
                 System.out.println(info);
             }
         }
-
-//        public synchronized static void updateLogModule(String moduleId, boolean value) {
-//            if (logModules.containsKey(moduleId)) {
-//                logModules.remove(moduleId);
-//            }
-//            logModules.put(moduleId, value);
-//            refreshStaticRef();
-//        }
-//
-//        public synchronized static void updateLogModules(Map<String, Boolean> modules) {
-//            Iterator<Entry<String, Boolean>> lmIterator = modules.entrySet().iterator();
-//            String key;
-//            Entry<String, Boolean> temp;
-//            while (lmIterator.hasNext()) {
-//                temp = lmIterator.next();
-//                key = temp.getKey();
-//                if (logModules.containsKey(key)) {
-//                    logModules.remove(key);
-//                }
-//                logModules.put(key, temp.getValue());
-//            }
-//            refreshStaticRef();
-//        }
-//
-//        public synchronized static boolean addLogModule(String moduleId, boolean value) {
-//            if (!logModules.put(moduleId, value)) {
-//                return false;
-//            }
-//            refreshStaticRef();
-//            return true;
-//        }
-//
-//        public synchronized static void addLogModules(Map<String, Boolean> modules) {
-//            logModules.putAll(modules);
-//            refreshStaticRef();
-//        }
-//
-//        public synchronized static void replaceLogModules(Map<String, Boolean> modules) {
-//            if (modules == null) {
-//                return;
-//            }
-//            LogManager.logModules.clear();
-//            LogManager.logModules = modules;
-//            refreshStaticRef();
-//        }
-//
-//        public static final Map<String, Boolean> getLogModuleMap() {
-//            return LogManager.logModules;
-//        }
-//
-//        public static Map<String, Boolean> getLevelModuleMap(String level) {
-//            Map<String, Boolean> modules = new HashMap<String, Boolean>();
-//
-//            Level lev = Level.toLevel(level);
-//            if (Level.TRACE.isGreaterOrEqual(lev)) {
-//                modules.put(Level.TRACE.toString(), true);
-//            }
-//            else {
-//                modules.put(Level.TRACE.toString(), false);
-//            }
-//
-//            if (Level.DEBUG.isGreaterOrEqual(lev)) {
-//                modules.put(Level.DEBUG.toString(), true);
-//            }
-//            else {
-//                modules.put(Level.DEBUG.toString(), false);
-//            }
-//
-//            if (Level.INFO.isGreaterOrEqual(lev)) {
-//                modules.put(Level.INFO.toString(), true);
-//            }
-//            else {
-//                modules.put(Level.INFO.toString(), false);
-//            }
-//
-//            if (Level.WARN.isGreaterOrEqual(lev)) {
-//                modules.put(Level.WARN.toString(), true);
-//            }
-//            else {
-//                modules.put(Level.WARN.toString(), false);
-//            }
-//
-//            if (Level.ERROR.isGreaterOrEqual(lev)) {
-//                modules.put(Level.ERROR.toString(), true);
-//            }
-//            else {
-//                modules.put(Level.ERROR.toString(), false);
-//            }
-//            return modules;
-//        }
-//
-        // LogFactory.logModules有变动 则刷新静态变量
-//        private static void refreshStaticRef() {
-//            traceEnabled = LogManager.logModules.get("TRACE");
-//            debugEnabled = LogManager.logModules.get("DEBUG");
-//            infoEnabled = LogManager.logModules.get("INFO");
-//        }
-
-//        private static void updateLevelModuleMap(String level) {
-//            updateLogModules(getLevelModuleMap(level));
-//        }
-//
-//        private synchronized static boolean isEnabledFor(String moduleId) {
-//            Iterator<Entry<String, Boolean>> lmIterator = LogManager.logModules.entrySet().iterator();
-//            String key;
-//            Entry<String, Boolean> temp;
-//            while (lmIterator.hasNext()) {
-//                temp = lmIterator.next();
-//                key = temp.getKey();
-//                if (key.equals(moduleId)) {
-//                    return temp.getValue();
-//                }
-//            }
-//            // 默认用LogFactory的设置
-//            return LogFactory.isDebugEnabled();
-//        }
-
 
     }
 
