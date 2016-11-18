@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2013-6-21 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.zollty.log.LogFactory.LogManager;
+import org.jretty.log.LogFactory.LogManager;
 
 /**
  * @author zollty
@@ -350,38 +350,38 @@ public class LoggerWrapper implements Logger, LoggerWrapperAPI, Serializable {
     }
 
     @Override
-    public void log(String callerFQCN, org.zollty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
-        if (org.zollty.log.Level.TRACE.isGreaterOrEqual(lev)) {
+    public void log(String callerFQCN, org.jretty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
+        if (org.jretty.log.Level.TRACE.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.TRACE) && this.logger.isTraceEnabled()) {
                 LoggerManager.traceIncrement(name);
                 this.logger.log(callerFQCN, lev, t, msg, msgParams);
             }
         }
-        else if (org.zollty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.DEBUG) && this.logger.isDebugEnabled()) {
                 LoggerManager.debugIncrement(name);
                 this.logger.log(callerFQCN, lev, t, msg, msgParams);
             }
         }
-        else if (org.zollty.log.Level.INFO.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.INFO.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.INFO) && this.logger.isInfoEnabled()) {
                 LoggerManager.infoIncrement(name);
                 this.logger.log(callerFQCN, lev, t, msg, msgParams);
             }
         }
-        else if (org.zollty.log.Level.WARN.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.WARN.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.WARN)) {
                 LoggerManager.warnIncrement(name);
                 this.logger.log(callerFQCN, lev, t, msg, msgParams);
             }
         }
-        else if (org.zollty.log.Level.ERROR.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.ERROR.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.ERROR)) {
                 LoggerManager.errorIncrement(name);
                 this.logger.log(callerFQCN, lev, t, msg, msgParams);
             }
         }
-        else if (org.zollty.log.Level.FATAL.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.FATAL.isGreaterOrEqual(lev)) {
             if (isEffectiveLevel(Level.FATAL)) {
                 LoggerManager.errorIncrement(name);
                 this.logger.log(callerFQCN, Level.FATAL, t, msg, msgParams);

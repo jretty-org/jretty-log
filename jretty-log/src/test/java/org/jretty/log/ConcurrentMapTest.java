@@ -1,11 +1,11 @@
-package org.zollty.log;
+package org.jretty.log;
 
 import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.zollty.log.LogFactory.LogManager;
+import org.jretty.log.LogFactory.LogManager;
 
 public class ConcurrentMapTest {
 

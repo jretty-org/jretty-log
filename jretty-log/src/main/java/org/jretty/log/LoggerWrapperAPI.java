@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2015-6-17 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package org.zollty.log;
+package org.jretty.log;
 
 import java.util.Comparator;
 import java.util.HashMap;

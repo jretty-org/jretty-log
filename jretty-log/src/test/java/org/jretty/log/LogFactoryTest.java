@@ -1,4 +1,4 @@
-package org.zollty.log;
+package org.jretty.log;
 
 
 public class LogFactoryTest {

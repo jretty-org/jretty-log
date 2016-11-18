@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2013-6-22 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -25,7 +25,7 @@ import org.apache.log4j.xml.DOMConfigurator;
  * @author zollty
  * @since 2013-6-22
  */
-public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serializable {
+public class Log4jLogger implements org.jretty.log.Logger, LoggerSupport, Serializable {
 
     private static final long serialVersionUID = -226607492227272649L;
 
@@ -91,7 +91,7 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     }
 
     @Override
-    public org.zollty.log.Logger newInstance(String name) {
+    public org.jretty.log.Logger newInstance(String name) {
         return new Log4jLogger(name);
     }
 
@@ -244,24 +244,24 @@ public class Log4jLogger implements org.zollty.log.Logger, LoggerSupport, Serial
     }
 
     @Override
-    public void log(String callerFQCN, org.zollty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
+    public void log(String callerFQCN, org.jretty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
         Level level;
-        if (org.zollty.log.Level.TRACE.isGreaterOrEqual(lev)) {
+        if (org.jretty.log.Level.TRACE.isGreaterOrEqual(lev)) {
             level = traceLevel;
         }
-        else if (org.zollty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
             level = Level.DEBUG;
         }
-        else if (org.zollty.log.Level.INFO.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.INFO.isGreaterOrEqual(lev)) {
             level = Level.INFO;
         }
-        else if (org.zollty.log.Level.WARN.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.WARN.isGreaterOrEqual(lev)) {
             level = Level.WARN;
         }
-        else if (org.zollty.log.Level.ERROR.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.ERROR.isGreaterOrEqual(lev)) {
             level = Level.ERROR;
         }
-        else if (org.zollty.log.Level.FATAL.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.FATAL.isGreaterOrEqual(lev)) {
             level = Level.FATAL;
         }
         else {

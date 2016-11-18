@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zollty.log.log4j;
+package org.jretty.log.log4j;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,7 +31,7 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.helpers.LogLog;
 import org.apache.log4j.spi.LoggingEvent;
-import org.zollty.log.LogUtils;
+import org.jretty.log.LogUtils;
 
 /**
    DailyRollingFileAppender extends {@link FileAppender} so that the

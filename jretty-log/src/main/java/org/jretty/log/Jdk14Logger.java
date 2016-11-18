@@ -12,14 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2014-6-09 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import org.zollty.log.LogFactory.LogManager;
+import org.jretty.log.LogFactory.LogManager;
 
 /**
  * java.util.logging.Logger的包装类，支持SUN JDK和IBM JDK，其他JDK未经过测试。
@@ -27,7 +27,7 @@ import org.zollty.log.LogFactory.LogManager;
  * @author zollty
  * @since 2014-6-9
  */
-public class Jdk14Logger implements org.zollty.log.Logger, LoggerSupport, Serializable {
+public class Jdk14Logger implements org.jretty.log.Logger, LoggerSupport, Serializable {
 
     /**
      * 
@@ -54,31 +54,31 @@ public class Jdk14Logger implements org.zollty.log.Logger, LoggerSupport, Serial
     }
 
     @Override
-    public org.zollty.log.Logger newInstance(String name) {
+    public org.jretty.log.Logger newInstance(String name) {
         return new Jdk14Logger(name);
     }
 
     public static Level getLevel() {
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.FATAL) 
-                || LogManager.getThreshold().equals(org.zollty.log.Level.ERROR)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.FATAL) 
+                || LogManager.getThreshold().equals(org.jretty.log.Level.ERROR)) {
             return Level.SEVERE;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.WARN)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.WARN)) {
             return Level.WARNING;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.INFO)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.INFO)) {
             return Level.INFO;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.DEBUG)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.DEBUG)) {
             return Level.FINE;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.TRACE)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.TRACE)) {
             return Level.FINEST;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.ALL)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.ALL)) {
             return Level.ALL;
         }
-        if (LogManager.getThreshold().equals(org.zollty.log.Level.OFF)) {
+        if (LogManager.getThreshold().equals(org.jretty.log.Level.OFF)) {
             return Level.OFF;
         }
         return Level.INFO;
@@ -217,30 +217,30 @@ public class Jdk14Logger implements org.zollty.log.Logger, LoggerSupport, Serial
     }
 
     @Override
-    public void log(String callerFQCN, org.zollty.log.Level level, Throwable t, Object message, Object... msgParams) {
+    public void log(String callerFQCN, org.jretty.log.Level level, Throwable t, Object message, Object... msgParams) {
         Level julLevel;
         if (level == null) {
             julLevel = getLevel();
         }
-        else if (level.equals(org.zollty.log.Level.FATAL) || level.equals(org.zollty.log.Level.ERROR)) {
+        else if (level.equals(org.jretty.log.Level.FATAL) || level.equals(org.jretty.log.Level.ERROR)) {
             julLevel = Level.SEVERE;
         }
-        else if (level.equals(org.zollty.log.Level.WARN)) {
+        else if (level.equals(org.jretty.log.Level.WARN)) {
             julLevel = Level.WARNING;
         }
-        else if (level.equals(org.zollty.log.Level.INFO)) {
+        else if (level.equals(org.jretty.log.Level.INFO)) {
             julLevel = Level.INFO;
         }
-        else if (level.equals(org.zollty.log.Level.DEBUG)) {
+        else if (level.equals(org.jretty.log.Level.DEBUG)) {
             julLevel = Level.FINE;
         }
-        else if (level.equals(org.zollty.log.Level.TRACE)) {
+        else if (level.equals(org.jretty.log.Level.TRACE)) {
             julLevel = Level.FINEST;
         }
-        else if (level.equals(org.zollty.log.Level.ALL)) {
+        else if (level.equals(org.jretty.log.Level.ALL)) {
             julLevel = Level.ALL;
         }
-        else if (level.equals(org.zollty.log.Level.OFF)) {
+        else if (level.equals(org.jretty.log.Level.OFF)) {
             julLevel = Level.OFF;
         }
         else {

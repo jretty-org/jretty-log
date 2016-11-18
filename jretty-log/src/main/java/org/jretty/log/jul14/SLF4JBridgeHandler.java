@@ -22,7 +22,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-package org.zollty.log.jul14;
+package org.jretty.log.jul14;
 
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
@@ -32,8 +32,8 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
-import org.zollty.log.LogFactory;
-import org.zollty.log.Logger;
+import org.jretty.log.LogFactory;
+import org.jretty.log.Logger;
 
 
 
@@ -208,18 +208,18 @@ public class SLF4JBridgeHandler extends Handler {
   protected void callLocationAwareLogger(Logger lal,
                                          LogRecord record) {
     int julLevelValue = record.getLevel().intValue();
-    org.zollty.log.Level slf4jLevel;
+    org.jretty.log.Level slf4jLevel;
 
     if (julLevelValue <= TRACE_LEVEL_THRESHOLD) {
-      slf4jLevel = org.zollty.log.Level.TRACE;
+      slf4jLevel = org.jretty.log.Level.TRACE;
     } else if (julLevelValue <= DEBUG_LEVEL_THRESHOLD) {
-      slf4jLevel = org.zollty.log.Level.DEBUG;
+      slf4jLevel = org.jretty.log.Level.DEBUG;
     } else if (julLevelValue <= INFO_LEVEL_THRESHOLD) {
-      slf4jLevel = org.zollty.log.Level.INFO;
+      slf4jLevel = org.jretty.log.Level.INFO;
     } else if (julLevelValue <= WARN_LEVEL_THRESHOLD) {
-      slf4jLevel = org.zollty.log.Level.WARN;
+      slf4jLevel = org.jretty.log.Level.WARN;
     } else {
-      slf4jLevel = org.zollty.log.Level.ERROR;
+      slf4jLevel = org.jretty.log.Level.ERROR;
     }
     String i18nMessage = getMessageI18N(record);
     lal.log(FQCN, slf4jLevel, record.getThrown(), i18nMessage);

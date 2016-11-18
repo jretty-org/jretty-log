@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2014-6-10 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
@@ -44,7 +44,7 @@ public class ConsoleJdk14Logger extends Jdk14Logger {
     }
 
     @Override
-    public org.zollty.log.Logger newInstance(String name) {
+    public org.jretty.log.Logger newInstance(String name) {
         return new ConsoleJdk14Logger(name);
     }
 

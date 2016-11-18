@@ -1,7 +1,7 @@
-package org.zollty.log;
+package org.jretty.log;
 
 import org.junit.Test;
-import org.zollty.log.LogFactory.LogManager;
+import org.jretty.log.LogFactory.LogManager;
 
 public class LF_isTraceEnabled {
     

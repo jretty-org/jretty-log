@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * Create by ZollTy on 2013-6-22 (http://blog.zollty.com/, zollty@163.com)
  */
-package org.zollty.log;
+package org.jretty.log;
 
 import java.io.Serializable;
 
@@ -23,7 +23,7 @@ import org.slf4j.spi.LocationAwareLogger;
  * @author zollty
  * @since 2013-6-22
  */
-public class LogbackLogger implements org.zollty.log.Logger, LoggerSupport, Serializable {
+public class LogbackLogger implements org.jretty.log.Logger, LoggerSupport, Serializable {
 
     private static final long serialVersionUID = -226607492227272649L;
     
@@ -60,7 +60,7 @@ public class LogbackLogger implements org.zollty.log.Logger, LoggerSupport, Seri
     }
 
     @Override
-    public org.zollty.log.Logger newInstance(String name) {
+    public org.jretty.log.Logger newInstance(String name) {
         return new LogbackLogger(name);
     }
 
@@ -210,24 +210,24 @@ public class LogbackLogger implements org.zollty.log.Logger, LoggerSupport, Seri
     }
 
     @Override
-    public void log(String callerFQCN, org.zollty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
+    public void log(String callerFQCN, org.jretty.log.Level lev, Throwable t, Object msg, Object... msgParams) {
         int level;
-        if (org.zollty.log.Level.TRACE.isGreaterOrEqual(lev)) {
+        if (org.jretty.log.Level.TRACE.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.TRACE_INT;
         }
-        else if (org.zollty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.DEBUG.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.DEBUG_INT;
         }
-        else if (org.zollty.log.Level.INFO.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.INFO.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.INFO_INT;
         }
-        else if (org.zollty.log.Level.WARN.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.WARN.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.WARN_INT;
         }
-        else if (org.zollty.log.Level.ERROR.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.ERROR.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.ERROR_INT;
         }
-        else if (org.zollty.log.Level.FATAL.isGreaterOrEqual(lev)) {
+        else if (org.jretty.log.Level.FATAL.isGreaterOrEqual(lev)) {
             level = LocationAwareLogger.ERROR_INT;
         }
         else {

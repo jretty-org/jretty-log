@@ -1,10 +1,10 @@
-package org.zollty.log;
+package org.jretty.log;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.zollty.log.LogFactory.LogManager;
+import org.jretty.log.LogFactory.LogManager;
 
 public class LF_parentLoggers {
     

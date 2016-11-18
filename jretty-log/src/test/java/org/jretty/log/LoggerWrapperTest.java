@@ -1,4 +1,4 @@
-package org.zollty.log;
+package org.jretty.log;
 
 import org.junit.Assert;
 import org.junit.Test;
