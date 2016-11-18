@@ -1,6 +1,0 @@
-19:07:14.017 [main] [WARN] test.LogTest - ============warn中文测试============
-19:07:14.017 [main] [ERROR] test.LogTest - ===========error Level=============
-19:07:14.018 [main] [ERROR] test.LogTest - hello guys, now time is Fri Nov 18 19:07:14 CST 2016. 
-19:07:14.021 [main] [WARN] MyLog - ============warn中文测试============
-19:07:14.022 [main] [ERROR] MyLog - ===========error Level=============
-19:07:14.022 [main] [ERROR] MyLog - hello guys, now time is Fri Nov 18 19:07:14 CST 2016. 
