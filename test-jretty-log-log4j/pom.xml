@@ -16,8 +16,8 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.zollty</groupId>
-    <artifactId>zollty-log-parent</artifactId>
+    <groupId>org.jretty</groupId>
+    <artifactId>jretty-log-parent</artifactId>
     <version>1.0.0-RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -28,8 +28,8 @@
   <dependencies>
   
     <dependency>
-      <groupId>org.zollty</groupId>
-      <artifactId>zollty-log</artifactId>
+      <groupId>org.jretty</groupId>
+      <artifactId>jretty-log</artifactId>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>

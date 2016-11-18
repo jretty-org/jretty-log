@@ -14,18 +14,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.zollty</groupId>
-  <artifactId>zollty-log-parent</artifactId>
+  <groupId>org.jretty</groupId>
+  <artifactId>jretty-log-parent</artifactId>
   <version>1.0.0-RELEASE</version>
   <packaging>pom</packaging>
-  <name>zollty-log-parent</name>
-  <url>http://www.zollty.com/zollty-log/</url>
+  <name>jretty-log-parent</name>
   <description>A simple, generic and flexible logging library for Java, it's also a Monitor Logging Facade for Java.</description>
 
   <modules>
-    <module>zollty-log</module>
-    <module>zt-commons-logging</module>
-    <module>zt-slf4j-api</module>
+    <module>jretty-log</module>
+    <module>jretty-commons-logging</module>
+    <module>jretty-slf4j</module>
+    <module>jretty-log4j</module>
+    <module>test-jretty-log-logback</module>
+    <module>test-jretty-log-log4j</module>
   </modules>
 
   <!-- CONST -->
@@ -45,9 +47,9 @@
       </dependency>
 
       <dependency>
-        <groupId>org.zollty</groupId>
-        <artifactId>zollty-log</artifactId>
-        <version>1.4.0</version>
+        <groupId>org.jretty</groupId>
+        <artifactId>jretty-log</artifactId>
+        <version>1.2.0</version>
       </dependency>
 
       <!-- for test -->
@@ -224,7 +226,7 @@
         <role>Project Manager</role>
         <role>Architect</role>
       </roles>
-      <organization>zollty-org</organization>
+      <organization>jretty-org</organization>
       <organizationUrl>http://www.zollty.org</organizationUrl>
     </developer>
   </developers>

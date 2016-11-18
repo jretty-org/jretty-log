@@ -16,15 +16,15 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.zollty</groupId>
-    <artifactId>zollty-log-parent</artifactId>
+    <groupId>org.jretty</groupId>
+    <artifactId>jretty-log-parent</artifactId>
     <version>1.0.0-RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>zollty-log</artifactId>
+  <artifactId>jretty-log</artifactId>
   <packaging>jar</packaging>
-  <version>1.4.0</version>
-  <name>zollty-log</name>
+  <version>1.2.0</version>
+  <name>jretty-log</name>
 
   <dependencies>
 
