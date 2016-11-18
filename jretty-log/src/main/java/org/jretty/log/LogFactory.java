@@ -84,7 +84,7 @@ public class LogFactory {
         
         public static boolean debug = true;
         
-        public synchronized static void refreshZolltyLogConfig(final String configName) {
+        public synchronized static void refreshLogConfig(final String configName) {
             InputStream in = null;
             in = Thread.currentThread().getContextClassLoader().getResourceAsStream(configName);
             Properties props = new Properties();
@@ -96,7 +96,7 @@ public class LogFactory {
                         + "], please check If it exists? and Can be reached by Thread.currentThread().getContextClassLoader()?");
             }
             Map<String, String> pmap = LogUtils.covertProperties2Map(props);
-            refreshZolltyLogConfig(pmap);
+            refreshLogConfig(pmap);
         }
 
         /** 
@@ -108,7 +108,7 @@ public class LogFactory {
          * </pre>
          * 没有设置Appender（LOG4J）等，则不更新Appender
          */
-        public synchronized static void refreshZolltyLogConfig(Map<String, String> pmap) {
+        public synchronized static void refreshLogConfig(Map<String, String> pmap) {
             
             String rootLogger = pmap.get("rootLogger");
             
@@ -206,7 +206,7 @@ public class LogFactory {
                 try {
                     props.load(in);
                     Map<String, String> pmap = LogUtils.covertProperties2Map(props);
-                    LogManager.refreshZolltyLogConfig(pmap);
+                    LogManager.refreshLogConfig(pmap);
                     refreshed = true;
                 }
                 catch (IOException e) {
@@ -233,14 +233,14 @@ public class LogFactory {
                     }
                 }
                 
-                LogManager.refreshZolltyLogConfig(pmap);
+                LogManager.refreshLogConfig(pmap);
             }
         }
         
         public synchronized static void refreshZolltyLogConfig(String logName, String level) {
             Map<String, String> cmap = new HashMap<String, String>();
             cmap.put("rootLogger", level+","+logName);
-            LogManager.refreshZolltyLogConfig(cmap);
+            LogManager.refreshLogConfig(cmap);
         }
 
         public static void setThreshold(String level) {

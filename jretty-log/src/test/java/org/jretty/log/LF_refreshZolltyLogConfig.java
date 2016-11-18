@@ -12,14 +12,14 @@ public class LF_refreshZolltyLogConfig {
         
         Logger logger = LOG;
         
-        LogFactory.LogManager.refreshZolltyLogConfig(LogManager.DEFAULT_CONFIG_PATH);
+        LogFactory.LogManager.refreshLogConfig(LogManager.DEFAULT_CONFIG_PATH);
         
         // $$ ConsoleLogger输出 $$
         logger.error("---------------------------");
         logger.error("---------------------------");
         
         // change to Log4jLogger
-        LogFactory.LogManager.refreshZolltyLogConfig("zollty-log-spec.properties");
+        LogFactory.LogManager.refreshLogConfig("zollty-log-spec.properties");
         
         // no need to reload, it will atuo reload.
         //logger = LogFactory.getLogger(); 
