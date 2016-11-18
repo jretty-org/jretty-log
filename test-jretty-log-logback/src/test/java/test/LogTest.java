@@ -18,7 +18,7 @@ public class LogTest {
 
         LOG.error("hello {}, now time is {}. ", "guys", new java.util.Date());
 
-        LogFactory.LogManager.refreshZolltyLogConfig("LOGBACK", "TRACE");
+        LogFactory.LogManager.refreshLogConfig("LOGBACK", "TRACE");
         Logger LOG = LogFactory.getLogger("MyLog");
         LOG.trace("===========trace Level=============");
         LOG.debug("===========debug Level=============");

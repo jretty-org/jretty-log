@@ -1,7 +1,7 @@
 /* 
  * Copyright (C) 2013-2014 the original author or authors.
  * 
- * [Zollty-Log && Mlf4j (Monitoring Logging Facade for Java)]
+ * [Jretty-Log && Mlf4j (Monitoring Logging Facade for Java)]
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * you may not use this file except in compliance with the License.
@@ -428,5 +428,19 @@ public class LogUtils {
             }
         }
         return sb.toString();
+    }
+    
+    
+    private static StringBuilder innerLogCache;
+
+    public static void report(String info, Logger log) {
+        if (innerLogCache == null) {
+            innerLogCache = new StringBuilder();
+        }
+        innerLogCache.append(info).append("\n");
+        if (log != null) {
+            log.info(innerLogCache.toString());
+            innerLogCache = null;
+        }
     }
 }

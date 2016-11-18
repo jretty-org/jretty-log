@@ -1,7 +1,7 @@
 /* 
  * Copyright (C) 2013-2014 the original author or authors.
  * 
- * [Zollty-Log && Mlf4j (Monitoring Logging Facade for Java)]
+ * [Jretty-Log && Mlf4j (Monitoring Logging Facade for Java)]
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,6 @@ public class Level {
     }
 
     public static Level toLevel(String level) {
-        // return toLevel(level, TRACE);
         if (level == null) {
             throw new IllegalArgumentException("the level can't be null!");
         }
@@ -67,7 +66,6 @@ public class Level {
     }
 
     public static Level toLevel(int level) {
-        // return toLevel(level, TRACE);
         switch (level) {
         case Integer.MIN_VALUE:
             return ALL;

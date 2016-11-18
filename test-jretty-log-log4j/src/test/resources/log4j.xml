@@ -25,7 +25,7 @@
 		</layout>
 	</appender>
 	
-	<appender name="debugAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+	<appender name="debugAppender" class="org.jretty.log.log4j.DailyRollingFileAppender">
 		<param name="File" value="./target/proj-debug.log" />
 		<!-- 默认DEBUG，可以动态修改成TRACE -->
 		<param name="threshold" value="DEBUG" />
@@ -41,7 +41,7 @@
 		</layout>
 	</appender>
     
-    <appender name="infoAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">  
+    <appender name="infoAppender" class="org.jretty.log.log4j.DailyRollingFileAppender">  
         <param name="File" value="./target/proj-info.log" /> 
         <param name="threshold" value="INFO" />  
         <param name="DatePattern" value="'.'yyyy-MM-dd" />
@@ -55,7 +55,7 @@
 		</layout>
     </appender>
   	
-    <appender name="errorAppender" class="org.zollty.log.log4j.DailyRollingFileAppender">
+    <appender name="errorAppender" class="org.jretty.log.log4j.DailyRollingFileAppender">
         <param name="File" value="./target/proj-error.log" />
         <param name="threshold" value="ERROR" />
         <param name="DatePattern" value="'.'yyyy-MM-dd" />

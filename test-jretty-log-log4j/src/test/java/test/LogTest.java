@@ -18,7 +18,7 @@ public class LogTest {
         LOG.error("hello {}, now time is {}. ", "guys", new java.util.Date());
         
         
-        LogFactory.LogManager.refreshZolltyLogConfig("LOG4J", "ALL");
+        LogFactory.LogManager.refreshLogConfig("LOG4J", "ALL");
         LOG.debug("===========debug Level=============");
         LOG.info( "===========info  Level=============");
         LOG.warn("============warn中文测试============");

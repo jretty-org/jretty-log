@@ -1,7 +1,7 @@
 /* 
  * Copyright (C) 2013-2014 the original author or authors.
  * 
- * [Zollty-Log && Mlf4j (Monitoring Logging Facade for Java)]
+ * [Jretty-Log && Mlf4j (Monitoring Logging Facade for Java)]
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * you may not use this file except in compliance with the License.
@@ -79,10 +79,8 @@ public class LogFactory {
         public static final ConcurrentMap<String, LoggerWrapper> cacheLoggerMap = 
                 new ConcurrentHashMap<String, LoggerWrapper>();
 
-        public static final String DEFAULT_CONFIG_PATH = "mlf4j-default.properties";
-        public static final String SPECIFY_CONFIG_PATH = "zollty-log.properties";
-        
-        public static boolean debug = true;
+        public static final String DEFAULT_CONFIG_PATH = "jretty-log-default.properties";
+        public static final String SPECIFY_CONFIG_PATH = "jretty-log.properties";
         
         public synchronized static void refreshLogConfig(final String configName) {
             InputStream in = null;
@@ -219,17 +217,17 @@ public class LogFactory {
                 try {
                     Class.forName("ch.qos.logback.classic.LoggerContext");
                     pmap.put("rootLogger", "TRACE,"+LogbackLogger.LOG_NAME);
-                    LogManager.report("WARN: No log Config was found, 'LogbackLogger' will be used and threshold level is 'OFF'.");
+                    LogUtils.report("WARN: No log Config was found, 'LogbackLogger' will be used and threshold level is 'OFF'.", null);
                 } catch (ClassNotFoundException e) {
                     // ignore
                     try {
                         Class.forName("org.apache.log4j.Logger");
                         pmap.put("rootLogger", "ALL,"+Log4jLogger.LOG_NAME);
-                        LogManager.report("WARN: No log Config was found, 'Log4jLogger' will be used and threshold level is 'OFF'.");
+                        LogUtils.report("WARN: No log Config was found, 'Log4jLogger' will be used and threshold level is 'OFF'.", null);
                     } catch (ClassNotFoundException es) {
                         // ignore
                         pmap.put("rootLogger", "OFF,"+ConsoleLogger.LOG_NAME);
-                        LogManager.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'OFF'.");
+                        LogUtils.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'OFF'.", null);
                     }
                 }
                 
@@ -237,7 +235,7 @@ public class LogFactory {
             }
         }
         
-        public synchronized static void refreshZolltyLogConfig(String logName, String level) {
+        public synchronized static void refreshLogConfig(String logName, String level) {
             Map<String, String> cmap = new HashMap<String, String>();
             cmap.put("rootLogger", level+","+logName);
             LogManager.refreshLogConfig(cmap);
@@ -288,7 +286,7 @@ public class LogFactory {
                 }
             }
 
-            LogManager.report("INFO: Refreshing LOG Config, LOG_NAME=[" + logName + "] Threshold LEVEL=[" + threshold + "].");
+            LogUtils.report("INFO: Refreshing LOG Config, LOG_NAME=[" + logName + "] Threshold LEVEL=[" + threshold + "].", logCreator.newInstance("root"));
         }
         
         // 更新所有已存在的logger
@@ -335,11 +333,6 @@ public class LogFactory {
             return LogManager.configContent;
         }
         
-        public static void report(String info) {
-            if( LogManager.debug ) {
-                System.out.println(info);
-            }
-        }
 
     }
 
