@@ -20,8 +20,8 @@ import java.io.Serializable;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
-import org.zollty.log.Level;
-import org.zollty.log.Logger;
+import org.jretty.log.Level;
+import org.jretty.log.Logger;
 
 /**
  * 
@@ -261,7 +261,7 @@ public class JrettySlf4jLog implements org.slf4j.Logger, Serializable {
      */
     protected Object readResolve() throws ObjectStreamException {
         
-        Logger logger = org.zollty.log.LogFactory.getLogger(this.name);
+        Logger logger = org.jretty.log.LogFactory.getLogger(this.name);
         return new JrettySlf4jLog(logger);
     }
     

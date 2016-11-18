@@ -1,8 +1,8 @@
 package test;
 
 import org.junit.Test;
-import org.zollty.log.LogFactory;
-import org.zollty.log.Logger;
+import org.jretty.log.LogFactory;
+import org.jretty.log.Logger;
 
 public class LogTest {
     

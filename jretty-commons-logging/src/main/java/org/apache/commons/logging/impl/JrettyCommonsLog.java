@@ -17,8 +17,8 @@ package org.apache.commons.logging.impl;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
-import org.zollty.log.Level;
-import org.zollty.log.Logger;
+import org.jretty.log.Level;
+import org.jretty.log.Logger;
 
 /**
  * 
@@ -238,7 +238,7 @@ public class JrettyCommonsLog implements org.apache.commons.logging.Log, Seriali
      * @throws ObjectStreamException
      */
     protected Object readResolve() throws ObjectStreamException {
-        Logger logger = org.zollty.log.LogFactory.getLogger(this.name);
+        Logger logger = org.jretty.log.LogFactory.getLogger(this.name);
         return new JrettyCommonsLog(logger);
     }
 

@@ -27,7 +27,7 @@ public class JrettySlf4jLogFactory implements ILoggerFactory {
     @Override
     public Logger getLogger(String name) {
         
-        return new JrettySlf4jLog( org.zollty.log.LogFactory.getLogger(name) );
+        return new JrettySlf4jLog( org.jretty.log.LogFactory.getLogger(name) );
     }
 
 }

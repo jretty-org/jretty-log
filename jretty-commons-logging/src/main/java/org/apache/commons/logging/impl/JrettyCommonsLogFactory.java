@@ -134,7 +134,7 @@ public class JrettyCommonsLogFactory extends LogFactory {
 //            return oldInstance == null ? newInstance : oldInstance;
 //        }
         
-        return new JrettyCommonsLog( org.zollty.log.LogFactory.getLogger(name) );
+        return new JrettyCommonsLog( org.jretty.log.LogFactory.getLogger(name) );
     }
 
     /**

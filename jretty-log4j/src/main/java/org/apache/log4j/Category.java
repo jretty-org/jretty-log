@@ -43,14 +43,14 @@ public class Category {
 
     private String name;
 
-    protected org.zollty.log.Logger slf4jLogger;
+    protected org.jretty.log.Logger slf4jLogger;
 //    private org.slf4j.spi.LocationAwareLogger locationAwareLogger;
 
 //    private static Marker FATAL_MARKER = MarkerFactory.getMarker("FATAL");
 
     Category(String name) {
         this.name = name;
-        slf4jLogger = org.zollty.log.LogFactory.getLogger(name);
+        slf4jLogger = org.jretty.log.LogFactory.getLogger(name);
 //        if (slf4jLogger instanceof LocationAwareLogger) {
 //            locationAwareLogger = (LocationAwareLogger) slf4jLogger;
 //        }
@@ -191,7 +191,7 @@ public class Category {
      * Delegates to {@link org.slf4j.Logger#trace(String)} method in SLF4J.
      */
     public void trace(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.TRACE, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.TRACE, null, message);
     }
 
     /**
@@ -199,14 +199,14 @@ public class Category {
      * method in SLF4J.
      */
     public void trace(Object message, Throwable t) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.TRACE, t, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.TRACE, t, message);
     }
 
     /**
      * Delegates to {@link org.slf4j.Logger#debug(String)} method of SLF4J.
      */
     public void debug(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.DEBUG, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.DEBUG, null, message);
     }
 
     /**
@@ -214,14 +214,14 @@ public class Category {
      * SLF4J.
      */
     public void debug(Object message, Throwable t) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.DEBUG, t, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.DEBUG, t, message);
     }
 
     /**
      * Delegates to {@link org.slf4j.Logger#info(String)} method in SLF4J.
      */
     public void info(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.INFO, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.INFO, null, message);
     }
 
     /**
@@ -229,14 +229,14 @@ public class Category {
      * SLF4J.
      */
     public void info(Object message, Throwable t) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.INFO, t, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.INFO, t, message);
     }
 
     /**
      * Delegates to {@link org.slf4j.Logger#warn(String)} method in SLF4J.
      */
     public void warn(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.WARN, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.WARN, null, message);
     }
 
     /**
@@ -244,14 +244,14 @@ public class Category {
      * SLF4J.
      */
     public void warn(Object message, Throwable t) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.WARN, t, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.WARN, t, message);
     }
 
     /**
      * Delegates to {@link org.slf4j.Logger#error(String)} method in SLF4J.
      */
     public void error(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.ERROR, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.ERROR, null, message);
     }
 
     /**
@@ -259,14 +259,14 @@ public class Category {
      * SLF4J.
      */
     public void error(Object message, Throwable t) {
-        slf4jLogger.log( CATEGORY_FQCN, org.zollty.log.Level.ERROR, t, message);
+        slf4jLogger.log( CATEGORY_FQCN, org.jretty.log.Level.ERROR, t, message);
     }
 
     /**
      * Delegates to {@link org.slf4j.Logger#error(String)} method in SLF4J.
      */
     public void fatal(Object message) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.FATAL, null, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.FATAL, null, message);
     }
 
     /**
@@ -274,7 +274,7 @@ public class Category {
      * SLF4J. In addition, the call is marked with a marker named "FATAL".
      */
     public void fatal(Object message, Throwable t) {
-        slf4jLogger.log(CATEGORY_FQCN, org.zollty.log.Level.FATAL, t, message);
+        slf4jLogger.log(CATEGORY_FQCN, org.jretty.log.Level.FATAL, t, message);
     }
 
     protected void forcedLog(String FQCN, Priority p, Object msg, Throwable t) {
@@ -283,35 +283,35 @@ public class Category {
 
     // See also http://jira.qos.ch/browse/SLF4J-159
     public void log(String FQCN, Priority p, Object msg, Throwable t) {
-        org.zollty.log.Level levelInt = priorityToLevelInt(p);
+        org.jretty.log.Level levelInt = priorityToLevelInt(p);
         slf4jLogger.log(FQCN, levelInt, t, msg);
     }
 
     public void log(Priority p, Object message, Throwable t) {
-        org.zollty.log.Level levelInt = priorityToLevelInt(p);
+        org.jretty.log.Level levelInt = priorityToLevelInt(p);
         slf4jLogger.log(CATEGORY_FQCN, levelInt, t, message);
     }
 
     public void log(Priority p, Object message) {
-        org.zollty.log.Level levelInt = priorityToLevelInt(p);
+        org.jretty.log.Level levelInt = priorityToLevelInt(p);
         slf4jLogger.log(CATEGORY_FQCN, levelInt, null, message);
     }
 
-    private org.zollty.log.Level priorityToLevelInt(Priority p) {
+    private org.jretty.log.Level priorityToLevelInt(Priority p) {
         switch (p.level) {
         case Level.TRACE_INT:
         case Level.X_TRACE_INT:
-            return org.zollty.log.Level.TRACE;
+            return org.jretty.log.Level.TRACE;
         case Priority.DEBUG_INT:
-            return org.zollty.log.Level.DEBUG;
+            return org.jretty.log.Level.DEBUG;
         case Priority.INFO_INT:
-            return org.zollty.log.Level.INFO;
+            return org.jretty.log.Level.INFO;
         case Priority.WARN_INT:
-            return org.zollty.log.Level.WARN;
+            return org.jretty.log.Level.WARN;
         case Priority.ERROR_INT:
-            return org.zollty.log.Level.ERROR;
+            return org.jretty.log.Level.ERROR;
         case Priority.FATAL_INT:
-            return org.zollty.log.Level.FATAL;
+            return org.jretty.log.Level.FATAL;
         default:
             throw new IllegalStateException("Unknown Priority " + p);
         }
