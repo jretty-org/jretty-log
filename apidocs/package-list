@@ -1,3 +1,3 @@
-org.zollty.log
-org.zollty.log.jul14
-org.zollty.log.log4j
+org.jretty.log
+org.jretty.log.jul14
+org.jretty.log.log4j
