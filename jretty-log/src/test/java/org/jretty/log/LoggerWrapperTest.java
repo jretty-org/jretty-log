@@ -12,7 +12,7 @@ public class LoggerWrapperTest {
         
         LoggerWrapperAPI loggerWrapper = (LoggerWrapperAPI) LOG;
         
-        Assert.assertEquals("org.zollty.log.LoggerWrapperTest", loggerWrapper.getLogger().getName());
+        Assert.assertEquals("org.jretty.log.LoggerWrapperTest", loggerWrapper.getLogger().getName());
         
     }
 
