@@ -43,28 +43,4 @@
 
   </dependencies>
 
-  <build>
-
-    <plugins>
-
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-      
-      <!-- 打包源代码-绑定到install阶段 -->
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-      </plugin>
-
-    </plugins>
-  </build>
-
 </project>

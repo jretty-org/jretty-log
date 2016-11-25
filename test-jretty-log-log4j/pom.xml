@@ -65,15 +65,20 @@
   </dependencies>
 
   <build>
-
-    <plugins>
+    <plugins> <!-- skip install,javadoc,deploy -->
 
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <artifactId>maven-install-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
       </plugin>
-
+      
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
       </plugin>
       
       <plugin>
@@ -84,10 +89,19 @@
         </configuration>
       </plugin>
 
-      <!-- 生成javadoc-绑定到install阶段
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin> -->
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      
+      <plugin> 
+        <artifactId>maven-deploy-plugin</artifactId> 
+        <configuration> 
+          <skip>true</skip> 
+        </configuration> 
+      </plugin>
 
     </plugins>
   </build>
