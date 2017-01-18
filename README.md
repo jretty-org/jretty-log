@@ -5,15 +5,39 @@ The JrettyLog is a simple, generic and flexible logging library for Java, which 
 
 [http://www.jretty.com/jretty-log/](http://www.jretty.com/jretty-log/)
 
+
+##	Characteristic
+
+1.  fast, small and has no dependencies.
+2.  concise api, easy to use.
+3.  support all frequently-used loggers. like log4j, logback, commong-logging, jdk logger.
+4.  support custom extensions. custum-made your own logger.
+5.  support using with LogMonitor (a Web console， dynamic configuration and online view).
+
+
 ### Easy to use
 
 For example:
 
 ```java
-  public static final Logger LOG = LogFactory.getLogger(); // Concise definition
+  public Logger logger = LogFactory.getLogger(); // Concise API
 
-  LOG.error("Hello {}, welcome to {}", "GUYS", "JrettyLog Demo"); // use placeholder
-
+  // use placeholder, and it's more efficient than other loggers (log4j, logback...)
+  logger.error("hello {}, now time is {}. ", "guys", new java.util.Date());
+  
+  if (logger.isTraceEnabled()) { // control code block
+     int count = records.count();
+     logger.trace("this poll got {} records.", count);
+  }
+  
+  int id = 0;
+  try {
+    int b = 100 / id;
+  } catch (Exception e) {
+    // add additional tips for exception.
+    logger.error(e, "Some additional tips: Unexpected exception occurred. The param id = {}.", id);
+  }
+  
 ```
 
 ###  Some advanced usages
