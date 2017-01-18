@@ -30,12 +30,13 @@ For example:
      logger.trace("this poll got {} records.", count);
   }
   
-  int id = 0;
+  int id = 100;
   try {
-    int b = 100 / id;
+      queryById(id);
   } catch (Exception e) {
-    // add additional tips for exception.
-    logger.error(e, "Some additional tips: Unexpected exception occurred. The param id = {}.", id);
+      // add additional tips for exception.
+      logger.error(e, 
+        "Additional tips: unexpected exception occurred. The param id = {}.", id);
   }
   
 ```
