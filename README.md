@@ -43,4 +43,4 @@ For example:
 
 ###  Some advanced usages
 
-See the [manual](http://blog.zollty.com/b/archive/2014/07/zollty-log-use-manual.html) and [docs](http://www.jretty.com/jretty-log/apidocs/).
+See the [wiki](https://github.com/jretty-org/jretty-log/wiki) and [docs](http://www.jretty.com/jretty-log/apidocs/).
