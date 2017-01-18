@@ -206,18 +206,16 @@ public class LogFactory {
             if (!refreshed) { // logback > log4j_1.2 > ConsoleLogger
                 try {
                     Class.forName("ch.qos.logback.classic.LoggerContext");
-                    LogManager.refreshLogConfig(LogbackLogger.LOG_NAME, "TRACE");
+                    LogManager.refreshLogConfig(LogbackLogger.LOG_NAME, "OFF");
                     LogUtils.report("WARN: No log Config was found, 'LogbackLogger' will be used and threshold level is 'OFF'.", null);
                 } catch (ClassNotFoundException e) {
-                    // ignore
                     try {
                         Class.forName("org.apache.log4j.helpers.DateLayout");
                         LogManager.refreshLogConfig(Log4jLogger.LOG_NAME, "ALL");
                         LogUtils.report("WARN: No log Config was found, 'Log4jLogger' will be used and threshold level is 'OFF'.", null);
                     } catch (ClassNotFoundException es) {
-                        // ignore
-                        LogManager.refreshLogConfig(ConsoleLogger.LOG_NAME, "OFF");
-                        LogUtils.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'OFF'.", null);
+                        LogManager.refreshLogConfig(ConsoleLogger.LOG_NAME, "TRACE");
+                        LogUtils.report("WARN: No log Config was found, 'ConsoleLogger' will be used and threshold level is 'TRACE'.", null);
                     }
                 }
             }
