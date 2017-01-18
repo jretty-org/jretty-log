@@ -38,10 +38,6 @@ public class LogFactory {
     private volatile static LoggerSupport logCreator;
     private static final String LOGFACTORY_CLASS_NAME = LogFactory.class.getName();
 
-    static {
-        LogManager.setThreshold("TRACE");
-    }
-
     private LogFactory() {
     }
 
