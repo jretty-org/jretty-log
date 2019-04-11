@@ -21,24 +21,18 @@
     <version>1.0.0-RELEASE</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>jretty-slf4j</artifactId>
+  <artifactId>jretty-slf4j-default-impl</artifactId>
   <packaging>jar</packaging>
   <version>1.7.26</version>
   <name>jretty-slf4j</name>
-  <description>SLF4j implemented over jretty-log.</description>
+  <description>only for maven provide scope using.</description>
 
   <dependencies>
 
     <dependency>
-      <groupId>org.jretty</groupId>
-      <artifactId>jretty-log</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.jretty</groupId>
-      <artifactId>jretty-slf4j-default-impl</artifactId>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
       <version>1.7.26</version>
-      <scope>provided</scope>
     </dependency>
 
     <!-- For Test -->

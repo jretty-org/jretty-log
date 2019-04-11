@@ -24,34 +24,57 @@
  */
 package org.slf4j.impl;
 
-import org.slf4j.spi.MDCAdapter;
+import org.slf4j.IMarkerFactory;
+import org.slf4j.MarkerFactory;
+import org.slf4j.helpers.BasicMarkerFactory;
+import org.slf4j.spi.MarkerFactoryBinder;
 
 /**
- * This class is only a stub. Real implementations are found in 
- * each SLF4J binding project, e.g. slf4j-nop, slf4j-log4j12 etc.
- *
+ * 
+ * The binding of {@link MarkerFactory} class with an actual instance of 
+ * {@link IMarkerFactory} is performed using information returned by this class. 
+ * 
+ * This class is meant to provide a *dummy* StaticMarkerBinder to the slf4j-api module. 
+ * Real implementations are found in  each SLF4J binding project, e.g. slf4j-nop, 
+ * slf4j-simple, slf4j-log4j12 etc.
+ * 
  * @author Ceki G&uuml;lc&uuml;
  */
-public class StaticMDCBinder {
+public class StaticMarkerBinder implements MarkerFactoryBinder {
 
     /**
      * The unique instance of this class.
      */
-    public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();
+    public static final StaticMarkerBinder SINGLETON = new StaticMarkerBinder();
 
-    private StaticMDCBinder() {
+    private StaticMarkerBinder() {
         throw new UnsupportedOperationException("This code should never make it into the jar");
     }
 
     /**
-     * Currently this method always returns an instance of 
-     * {@link StaticMDCBinder}.
+     * Return the singleton of this class.
+     * 
+     * @return the StaticMarkerBinder singleton
+     * @since 1.7.14
      */
-    public MDCAdapter getMDCA() {
+    public static StaticMarkerBinder getSingleton() {
+        return SINGLETON;
+    }
+
+    /**
+     * Currently this method always returns an instance of 
+     * {@link BasicMarkerFactory}.
+     */
+    public IMarkerFactory getMarkerFactory() {
         throw new UnsupportedOperationException("This code should never make it into the jar");
     }
 
-    public String getMDCAdapterClassStr() {
+    /**
+     * Currently, this method returns the class name of
+     * {@link BasicMarkerFactory}.
+     */
+    public String getMarkerFactoryClassStr() {
         throw new UnsupportedOperationException("This code should never make it into the jar");
     }
+
 }
