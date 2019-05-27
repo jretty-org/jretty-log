@@ -191,6 +191,9 @@ public class LogFactory {
                 try {
                     props.load(in);
                     Map<String, String> pmap = LogUtils.covertProperties2Map(props);
+                    if (null != logCreator) {
+                        return; // 并发控制
+                    }
                     LogManager.refreshLogConfig(pmap);
                     refreshed = true;
                 }
@@ -201,6 +204,9 @@ public class LogFactory {
             }
             if (!refreshed) { // logback > log4j_1.2 > ConsoleLogger
                 try {
+                    if (null != logCreator) {
+                        return; // 并发控制
+                    }
                     Class.forName("ch.qos.logback.classic.LoggerContext");
                     LogManager.refreshLogConfig(LogbackLogger.LOG_NAME, "OFF");
                     LogUtils.report("WARN: No log Config was found, 'LogbackLogger' will be used and threshold level is 'OFF'.", null);
@@ -240,7 +246,7 @@ public class LogFactory {
         }
         
         /** 重置整个日志库配置到某个状态 */
-        private static void reset(String logName, String threshold, LoggerSupport logCreator, Map<String, Level> parentLoggers) {
+        private static synchronized void reset(String logName, String threshold, LoggerSupport logCreator, Map<String, Level> parentLoggers) {
             
             if (threshold == null || threshold.length() == 0) {
                 throw new IllegalArgumentException("the log 'threshold level' can't be null or empty.");
@@ -255,17 +261,17 @@ public class LogFactory {
             }
             if (logCreator != null) {
                 LogFactory.logCreator = logCreator;
-
-                boolean flag = true;
-                while (flag) { // 防并发控制
-                    try {
-                        reloadLogger();
-                        flag = false;
-                    }
-                    catch (Exception e) {
-                        continue;
-                    }
-                }
+                reloadLogger();
+//                boolean flag = true;
+//                while (flag) { // 防并发控制
+//                    try {
+//                        reloadLogger();
+//                        flag = false;
+//                    }
+//                    catch (Exception e) {
+//                        continue;
+//                    }
+//                }
             }
 
             LogUtils.report("INFO: Refreshing LOG Config, LOG_NAME=[" + logName + "] Threshold LEVEL=[" + threshold + "].", logCreator.newInstance("root"));
