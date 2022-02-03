@@ -61,27 +61,27 @@
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.1.2</version>
+        <version>1.2.10</version>
       </dependency>
       
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.2</version>
+        <version>1.2.10</version>
       </dependency>
 
       <!-- for test -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.11</version>
+        <version>4.13.2</version>
         <scope>test</scope>
       </dependency>
 
       <dependency>
         <groupId>org.zollty</groupId>
         <artifactId>zollty-tesper</artifactId>
-        <version>1.0</version>
+        <version>1.1.0</version>
         <scope>test</scope>
       </dependency>
 
