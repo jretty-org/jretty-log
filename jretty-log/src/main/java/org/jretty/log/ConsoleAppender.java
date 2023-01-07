@@ -29,19 +29,21 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
     private static final String MSG_SPLIT = " |- ";
     private static String classNameLayout;
     private static boolean showThread;
+    private static int lineLengthLimit = 32000;
+    private boolean showMeta = true;
 
     protected boolean isEffectiveLevel(Level level) {
         return level.isGreaterOrEqual(globalLevel);
     }
 
     protected void add(Object message, String className, Level level, Throwable throwable) {
-
         if (!isEffectiveLevel(level)) {
             return;
         }
 
-        // if( isTraceEnabled() ) System.err.println("===============================================================================================");
         StringBuilder sb = new StringBuilder();
+        if (showMeta) {
+            
         sb.append(LogUtils.format(new Date()));
         if (showThread) {
             sb.append(" [");
@@ -67,7 +69,34 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
             sb.append(MSG_SPLIT);
             sb.append(LogUtils.getStackTraceStr(throwable));
         }
-        System.out.println(sb.toString());
+        
+        }
+        
+        else {
+            if (message != null) {
+                if (throwable != null) {
+                    sb.append(message.toString()).append(MSG_SPLIT).append(LogUtils.getStackTraceStr(throwable));
+                } else {
+                    sb.append(message.toString());
+                }
+            } else if (throwable != null) {
+                sb.append(LogUtils.getStackTraceStr(throwable));
+            }
+        }
+        
+        if(level.isGreaterOrEqual(Level.ERROR)) {
+            if (sb.length() <= lineLengthLimit) {
+                System.err.println(sb.toString());
+            } else {
+                System.err.println(sb.replace(lineLengthLimit - 32, sb.length(), "....(len="+sb.length()+")").toString());
+            }
+        } else {
+            if (sb.length() <= lineLengthLimit) {
+                System.out.println(sb.toString());
+            } else {
+                System.out.println(sb.replace(lineLengthLimit - 32, sb.length(), "....(len="+sb.length()+")").toString());
+            }
+        }
     }
 
     public static void setGlobalLevel(final String level) {
@@ -88,6 +117,14 @@ public abstract class ConsoleAppender implements Logger, LoggerSupport, Serializ
     
     public static void setShowThread(boolean showThread) {
         ConsoleAppender.showThread = showThread;
+    }
+    
+    public static void setLineLengthLimit(int lineLengthLimit) {
+        ConsoleAppender.lineLengthLimit = lineLengthLimit;
+    }
+    
+    public void setShowMeta(boolean showMeta) {
+        this.showMeta = showMeta;
     }
 
     // --------- helper methods for this class-------
