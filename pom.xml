@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.jretty</groupId>
     <artifactId>jretty</artifactId>
-    <version>21</version>
+    <version>22</version>
   </parent>
   <artifactId>jretty-log-parent</artifactId>
   <version>1.0.0-RELEASE</version>
@@ -37,9 +37,9 @@
   <!-- CONST -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java-version>1.7</java-version>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <java-version>1.8</java-version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <!-- DEPENDENCIES Version Management -->
@@ -49,7 +49,7 @@
       <dependency>
         <groupId>org.jretty</groupId>
         <artifactId>jretty-log</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
       </dependency>
 
       <dependency>

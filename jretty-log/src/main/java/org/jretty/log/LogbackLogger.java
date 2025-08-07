@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2013-2014 the original author or authors.
+ * Copyright (C) 2013-2025 the original author or authors.
  * 
  * [Jretty-Log && Mlf4j (Monitoring Logging Facade for Java)]
  * 
@@ -16,7 +16,7 @@ package org.jretty.log;
 
 import java.io.Serializable;
 
-import org.slf4j.impl.StaticLoggerBinder;
+import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -47,7 +47,7 @@ public class LogbackLogger implements org.jretty.log.Logger, LoggerSupport, Seri
      * Return the native Logger instance we are using.
      */
     public org.slf4j.Logger getLogger() {
-        return StaticLoggerBinder.getSingleton().getLoggerFactory().getLogger(name);
+        return LoggerFactory.getILoggerFactory().getLogger(name);
     }
 
     public LogbackLogger() {

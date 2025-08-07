@@ -28,6 +28,9 @@ local.properties
 .settings/
 .loadpath
 
+# -----------Maven---------
+.idea/
+
 # External tool builders
 .externalToolBuilders/
 
